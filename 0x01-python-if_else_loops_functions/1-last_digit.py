@@ -2,7 +2,7 @@
 import random
 number = random.randint(-10000, 10000)
 if number < 0:
-    last_num = str(number)[-1:]
+    last_num = "-" + str(number)[-1:]
 elif number >= 0:
     last_num = str(number)[-1:]
 if int(last_num) > 5:
