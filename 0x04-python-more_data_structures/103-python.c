@@ -39,9 +39,6 @@ void print_python_bytes(PyObject *p)
         for (i = 0; i <= size && i < 10; i++)
 
                 printf(" %02hhx", trying_str[i]);
-
-        printf("\n");
-
 }
 
 
