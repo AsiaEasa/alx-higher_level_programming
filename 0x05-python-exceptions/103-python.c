@@ -1,5 +1,7 @@
 #include <Python.h>
 
+#include <stdio.h>
+
 #include <floatobject.h>
 
 #include <object.h>
