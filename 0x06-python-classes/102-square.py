@@ -1,42 +1,55 @@
 #!/usr/bin/python3
-class Square:
-    """Defines a square"""
-    def __init__(self, size=0):
-        """Initialises the data"""
-        self.size = size
+"""compare 2 squares"""
 
-    def area(self):
-        """Returns current square area"""
-        return self.__size**2
+
+class Square:
+    """define a class"""
+
+    def __init__(self, size=0):
+        self.size = size
 
     @property
     def size(self):
-        """Getter method"""
         return self.__size
 
     @size.setter
     def size(self, value):
-        """Setter method"""
-        self.__size = value
-        if type(value) != int:
-            raise TypeError("size must be an integer")
-        if value < 0:
+        if not isinstance(value, (int, float)):
+            raise TypeError("size must be a number")
+        elif value < 0:
             raise ValueError("size must be >= 0")
+        else:
+            self.__size = value
 
-    def __lt__(self, other):
-        return self.area() < other.area()
-
-    def __le__(self, other):
-        return self.area() <= other.area()
+    def area(self):
+        return self.__size**2
 
     def __eq__(self, other):
-        return self.area() == other.area()
+        if isinstance(other, Square):
+            return self.area() == other.area()
+        return False
 
     def __ne__(self, other):
-        return self.area() != other.area()
+        if isinstance(other, Square):
+            return self.area() != other.area()
+        return True
 
     def __gt__(self, other):
-        return self.area() > other.area()
+        if isinstance(other, Square):
+            return self.area() > other.area()
+        return False
 
     def __ge__(self, other):
-        return self.area() >= other.area()
+        if isinstance(other, Square):
+            return self.area() >= other.area()
+        return False
+
+    def __lt__(self, other):
+        if isinstance(other, Square):
+            return self.area() < other.area()
+        return False
+
+    def __le__(self, other):
+        if isinstance(other, Square):
+            return self.area() <= other.area()
+        return False
