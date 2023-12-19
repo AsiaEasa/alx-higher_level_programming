@@ -1,53 +1,108 @@
 #!/usr/bin/python3
-class Square:
-    """Defines a square"""
-    def __init__(self, size=0, position=(0, 0)):
-        """Initialises the data"""
-        self.size = size
-        self.position = position
 
-    def area(self):
-        """Returns current square area"""
-        return self.__size**2
+"""Define classes for a singly-linked list."""
+
+
+class Node:
+
+    """Represent a node in a singly-linked list."""
+
+    def __init__(self, data, next_node=None):
+        """Initialize a new Node.
+
+        Args:
+
+            data (int): The data of the new Node.
+
+            next_node (Node): The next node of the new Node.
+
+        """
+
+        self.data = data
+
+        self.next_node = next_node
 
     @property
-    def size(self):
-        """Getter method"""
-        return self.__size
+    def data(self):
+        """Get/set the data of the Node."""
 
-    @size.setter
-    def size(self, value):
-        """Setter method"""
-        self.__size = value
-        if type(value) != int:
-            raise TypeError("size must be an integer")
-        if value < 0:
-            raise ValueError("size must be >= 0")
+        return self.__data
 
-    def my_print(self):
-        """Prints the square"""
-        if self.__size == 0:
-            print()
+    @data.setter
+    def data(self, value):
+        if not isinstance(value, int):
+            raise TypeError("data must be an integer")
+
+        self.__data = value
+
+    @property
+    def next_node(self):
+        """Get/set the next_node of the Node."""
+
+        return self.__next_node
+
+    @next_node.setter
+    def next_node(self, value):
+        if not isinstance(value, Node) and value is not None:
+            raise TypeError("next_node must be a Node object")
+
+        self.__next_node = value
+
+
+class SinglyLinkedList:
+
+    """Represent a singly-linked list."""
+
+    def __init__(self):
+        """Initalize a new SinglyLinkedList."""
+
+        self.__head = None
+
+    def sorted_insert(self, value):
+        """Insert a new Node to the SinglyLinkedList.
+
+        The node is inserted into the list at the correct
+
+        ordered numerical position.
+
+        Args:
+
+            value (Node): The new Node to insert.
+
+        """
+
+        new = Node(value)
+
+        if self.__head is None:
+            new.next_node = None
+
+            self.__head = new
+
+        elif self.__head.data > value:
+            new.next_node = self.__head
+
+            self.__head = new
+
         else:
-            for y in range(self.__position[1]):
-                print()
-            for i in range(self.__size):
-                for x in range(self.__position[0]):
-                    print(' ', end='')
-                for j in range(self.__size):
-                    print('#', end='')
-                print()
+            tmp = self.__head
 
-    @property
-    def position(self):
-        """Getter method"""
-        return self.__position
+            while tmp.next_node is not None and tmp.next_node.data < value:
+                tmp = tmp.next_node
 
-    @position.setter
-    def position(self, value):
-        """Setter method"""
-        if type(value) != tuple or len(value) != 2:
-            raise TypeError("position must be a tuple of 2 positive integers")
-        if any(type(i) != int for i in value) or any(j < 0 for j in value):
-            raise TypeError("position must be a tuple of 2 positive integers")
-        self.__position = value
+            new.next_node = tmp.next_node
+
+            tmp.next_node = new
+
+    def __str__(self):
+        """Define the print() representation of a SinglyLinkedList."""
+
+        values = []
+
+        tmp = self.__head
+
+        while tmp is not None:
+            values.append(str(tmp.data))
+
+            tmp = tmp.next_node
+
+        return "\n".join(values)
