@@ -1,9 +1,3 @@
-The ``3-say_my_name`` module
-============================
-
-Using ``3-say_my_name``
----------------------
-
 Import module:
     >>> say_my_name = __import__('3-say_my_name').say_my_name
 
