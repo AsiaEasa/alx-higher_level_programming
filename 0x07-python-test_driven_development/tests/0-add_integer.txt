@@ -1,45 +1,10 @@
 Import function from module:
-
     >>> add_integer = __import__('0-add_integer').add_integer
-
-    >>> add_integer(2)
-    100
-
-    >>> add_integer(0)
-    98
-
-    >>> add_integer(123.9)
-    221
-
-    >>> add_integer(-95.5)
-    3
-
-    >>> add_integer(10, 5)
-    15
-
-    >>> add_integer(999999998, 999999999)
-    1999999997
-
-    >>> add_integer(34263478, -89234582395)
-    -89200318917
-
-    >>> add_integer(-13947692, 57234)
-    -13890458
-
-    >>> add_integer(123, 7.987)
-    130
-
-    >>> add_integer(234234.43545, 4352345)
-    4586579
-
-    >>> add_integer(0.9, 0.9)
-    0
-
     >>> add_integer(float('inf'), float('-inf'))
     Traceback (most recent call last):
     ...
     OverflowError: cannot convert float infinity to integer
-
+    
     >>> add_integer(0, float('nan'))
     Traceback (most recent call last):
     ...
@@ -50,11 +15,14 @@ Import function from module:
         ...
     TypeError: a must be an integer
 
-    >>> add_integer(123123, [])
-    Traceback (most recent call last):
-        ...
-    TypeError: b must be an integer
 
+    >>> add_integer(234234.43540, 4352340)
+    4586574
+    
+    
+    >>> add_integer(125, 7.987)
+    132
+    
     >>> add_integer(None, None)
     Traceback (most recent call last):
         ...
@@ -70,3 +38,35 @@ Import function from module:
     ...
     OverflowError: cannot convert float infinity to integer
     
+    >>> add_integer(4)
+    102
+
+
+    >>> add_integer(1)
+    99
+
+    >>> add_integer(123.9)
+    221
+    
+    >>> add_integer(123123, [])
+    Traceback (most recent call last):
+        ...
+    TypeError: b must be an integer
+
+    >>> add_integer(-95.8)
+    3
+
+    >>> add_integer(10, 50)
+    60
+
+    >>> add_integer(0.1, 0.9)
+    0
+    
+    >>> add_integer(999999997, 999999998)
+    1999999995
+
+    >>> add_integer(34263411, -89234582311)
+    -89200318900
+
+    >>> add_integer(-13947611, 57211)
+    -13890400
