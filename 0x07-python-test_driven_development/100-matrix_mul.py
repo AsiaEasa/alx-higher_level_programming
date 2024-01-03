@@ -4,43 +4,93 @@
 
 
 def matrix_mul(m_a, m_b):
-    """Multiplies two matrices.
+    """Multiplies one matrix by another.
 
     Args:
-        m_a (list of lists): First matrix.
-        m_b (list of lists): Second matrix.
+        m_a: the first matrix
+        m_b: the second matrix
 
     Returns:
-        list of lists: Result of the matrix multiplication.
+        matrix: the product
 
     Raises:
-        TypeError: If m_a or m_b is not a list or not a list of lists,
-                   or if an element in the matrices is not an integer or float.
-        ValueError: If m_a or m_b is empty or not a rectangle,
-                    or if m_a and m_b can't be multiplied.
+        TypeError: If m_a or m_b are not lists.
+        TypeError: If m_a or m_b are not lists of lists.
+        ValueError: If m_a or m_b are empty lists/matrices.
+        TypeError: If m_a or m_b contain a non int/float.
+        TypeError: If m_a or m_b are not rectangular.
+        ValueError: If m_a or m_b can't be multiplied.
     """
-    if not isinstance(m_a, list) or not isinstance(m_b, list):
-        raise TypeError("m_a must be a list and m_b must be a list")
 
-    if not all(isinstance(row, list) for row in m_a) or not all(isinstance(row, list) for row in m_b):
-        raise TypeError("m_a must be a list of lists and m_b must be a list of lists")
+    # Check if m_a and m_b are lists
+    if not isinstance(m_a, list):
+        raise TypeError("m_a must be a list")
+    if not isinstance(m_b, list):
+        raise TypeError("m_b must be a list")
 
-    if not m_a or not m_b:
-        raise ValueError("m_a can't be empty and m_b can't be empty")
+    # Initialize flags for error conditions
+    m_a_empty = False
+    m_b_empty = False
+    m_a_notrect = False
+    m_b_notrect = False
+    m_a_notnum = False
+    m_b_notnum = False
 
-    if not all(isinstance(num, (int, float)) for row in m_a for num in row) or \
-            not all(isinstance(num, (int, float)) for row in m_b for num in row):
-        raise TypeError("m_a should contain only integers or floats and m_b should contain only integers or floats")
+    # Check m_a for list of lists and rectangular shape
+    for row in m_a:
+        if not isinstance(row, list):
+            raise TypeError("m_a must be a list of lists")
+        if len(row) != len(m_a[0]):
+            m_a_notrect = True
+        for num in row:
+            if not isinstance(num, (int, float)):
+                m_a_notnum = True
 
-    if not all(len(row) == len(m_a[0]) for row in m_a) or not all(len(row) == len(m_b[0]) for row in m_b):
-        raise TypeError("each row of m_a must be of the same size and each row of m_b must be of the same size")
+    # Check m_b for list of lists and rectangular shape
+    for row in m_b:
+        if not isinstance(row, list):
+            raise TypeError("m_b must be a list of lists")
+        if len(row) != len(m_b[0]):
+            m_b_notrect = True
+        for num in row:
+            if not isinstance(num, (int, float)):
+                m_b_notnum = True
 
+    # Check for empty matrices
+    if len(m_a) == 0 or (len(m_a) == 1 and len(m_a[0]) == 0):
+        raise ValueError("m_a can't be empty")
+
+    if len(m_b) == 0 or (len(m_b) == 1 and len(m_b[0]) == 0):
+        raise ValueError("m_b can't be empty")
+
+    # Check for non-numeric elements
+    if m_a_notnum:
+        raise TypeError("m_a should contain only integers or floats")
+
+    if m_b_notnum:
+        raise TypeError("m_b should contain only integers or floats")
+
+    # Check for non-rectangular shape
+    if m_a_notrect:
+        raise TypeError("each row of m_a must should be of the same size")
+
+    if m_b_notrect:
+        raise TypeError("each row of m_b must should be of the same size")
+
+    # Check if matrices can be multiplied
     if len(m_a[0]) != len(m_b):
         raise ValueError("m_a and m_b can't be multiplied")
 
-    result = [[sum(a * b for a, b in zip(row_a, col_b)) for col_b in zip(*m_b)] for row_a in m_a]
+    # Multiply matrices and return result
+    res = [[] for i in range(len(m_a))]
+    for i in range(len(m_a)):
+        for j in range(len(m_b[0])):
+            c = 0
+            for k in range(len(m_b)):
+                c += m_a[i][k] * m_b[k][j]
+            res[i].append(c)
 
-    return result
+    return res
 
 
 if __name__ == "__main__":
