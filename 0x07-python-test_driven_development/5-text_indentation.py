@@ -1,32 +1,28 @@
 #!/usr/bin/python3
 
+
 def text_indentation(text):
-    """
-    Prints a text with 2 new lines after each occurrence of '.', '?', and ':' characters.
+    """Method for adding 2 new lines after '.?:' chars.
 
     Args:
-        text (str): The input text to be processed.
+        text: The str text.
 
     Raises:
-        TypeError: If the input 'text' is not a string.
-
-    Notes:
-        - The function prints each sentence or phrase on a new line with two blank lines between them.
-        - There are no leading or trailing spaces on each printed line.
+        TypeError: If text is not a str.
     """
     if not isinstance(text, str):
         raise TypeError("text must be a string")
 
-    separators = ['.', '?', ':']
-    current_line = ""
+    delimiters = [".", "?", ":"]
+    for delimiter in delimiters:
+        split_lines = text.split(delimiter)
+        stripped_lines = [line.strip(" ") for line in split_lines]
+        formatted_text = (delimiter + "\n\n").join(stripped_lines)
+        text = formatted_text
 
-    for char in text:
-        current_line += char
-        if char in separators:
-            print(current_line.strip())
-            print()  # Print an empty line after the separator
-            current_line = ""
+    print(text, end="")
 
-    # Print the last line if it's not empty
-    if current_line.strip():
-        print(current_line.strip())
+if __name__ == "__main__":
+
+    import doctest
+    doctest.testfile("tests/5-text_indentation.txt")
