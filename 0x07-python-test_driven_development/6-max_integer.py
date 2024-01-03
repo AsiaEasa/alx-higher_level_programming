@@ -16,6 +16,3 @@ def max_integer(list=[]):
             result = list[i]
         i += 1
     return result
-if __name__ == "__main__":
-    import doctest
-    doctest.testfile(
