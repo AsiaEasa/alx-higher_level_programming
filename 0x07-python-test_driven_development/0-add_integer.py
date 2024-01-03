@@ -10,8 +10,6 @@ def add_integer(a, b=98):
     """
     Adds two integers.
     """
-
-
     # Check if a is an integer or float
     if not isinstance(a, (int, float)):
         raise TypeError("a must be an integer")
@@ -26,6 +24,7 @@ def add_integer(a, b=98):
 
     # Return the sum of a and b
     return a + b
+
 
 if __name__ == "__main__":
     import doctest
