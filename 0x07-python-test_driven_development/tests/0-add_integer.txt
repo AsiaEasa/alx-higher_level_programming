@@ -1,4 +1,4 @@
-Import function from module:
+Import module:
     >>> add_integer = __import__('0-add_integer').add_integer
     >>> add_integer(float('inf'), float('-inf'))
     Traceback (most recent call last):
@@ -10,7 +10,7 @@ Import function from module:
     ...
     ValueError: cannot convert float NaN to integer
 
-    >>> add_integer("foo", 0)
+    >>> add_integer("hi", 0)
     Traceback (most recent call last):
         ...
     TypeError: a must be an integer
@@ -28,7 +28,7 @@ Import function from module:
         ...
     TypeError: a must be an integer
 
-    >>> add_integer("foo", "bar")
+    >>> add_integer("hello", "Alx")
     Traceback (most recent call last):
         ...
     TypeError: a must be an integer

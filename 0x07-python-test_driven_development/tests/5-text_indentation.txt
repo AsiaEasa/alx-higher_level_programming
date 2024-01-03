@@ -1,94 +1,83 @@
-The ``5-text_indentation`` module
-============================
-
-Using ``text_indentation``
----------------------
-
 Import module:
     >>> text_indentation = __import__('5-text_indentation').text_indentation
 
-Test no delim:
-    >>> text_indentation("Hello Holberton")
-    Hello Holberton
-
-Test string with spaces:
-    >>> text_indentation("Holberton          ")
-    Holberton
-
-Test string with spaces 2:
-    >>> text_indentation("        Holberton")
-    Holberton
+    >>> text_indentation("Hi ALX")
+    Hi ALX
+    >>> text_indentation("ALX                 ")
+    ALX
+    >>> text_indentation("   .     Hi   ")
+    .
+    <BLANKLINE>
+    Hi
+    >>> text_indentation("            ALX")
+    ALX
     
-Test string with spaces 3:
-    >>> text_indentation("        Holberton          ")
-    Holberton
-    
-Test string with empty string:
+    >>> text_indentation("        ALX          ")
+    ALX
+    >>> text_indentation("   Hi:   Ok   ?  ")
+    Hi:
+    <BLANKLINE>
+    Ok?
+    <BLANKLINE> 
     >>> text_indentation("")
-
-Test string with empty string 2:
-    >>> text_indentation("      ")
-
-Test simple:
-    >>> text_indentation("Hello: Holberton")
-    Hello:
+    >>> text_indentation("           ")
+    >>> text_indentation()
+    Traceback (most recent call last):
+    ...
+    TypeError: text_indentation() missing 1 required positional argument: 'text'
+    >>> text_indentation("Hi:: ALX")
+    Hi:
     <BLANKLINE>
-    Holberton
-
-Test delims with spaces:
-    >>> text_indentation("      ?:  :  ")
-    ?
+    :
+    <BLANKLINE>
+    ALX
+    >>> text_indentation("           .:    :  ")
+    .
     <BLANKLINE>
     :
     <BLANKLINE>
     :
     <BLANKLINE>
-
-Test newline:
     >>> text_indentation("\n")
     <BLANKLINE>
-
-Test newline 2:
-    >>> text_indentation("\n\n")
+    >>> text_indentation("\n\n\n")
     <BLANKLINE>
     <BLANKLINE>
-
-Test newline 3:
-    >>> text_indentation("Hello\n\n")
-    Hello
     <BLANKLINE>
-
-Test all delimeters:
-    >>> text_indentation("Hello: Holberton? school. fooo")
-    Hello:
+    >>> text_indentation("Hi  \n   \n  ")
+    Hi  
     <BLANKLINE>
-    Holberton?
+    >>> text_indentation("Hi: ALX? from. sudan")
+    Hi:
     <BLANKLINE>
-    school.
+    ALX?
     <BLANKLINE>
-    fooo
-
-Test all delimeters with spaces:
-    >>> text_indentation("Hello   :     Holberton    ?    school.    fooo")
-    Hello:
+    from.
     <BLANKLINE>
-    Holberton?
+    sudan
+    >>> text_indentation("Hi  :       ALX    ?  from.                 sudan")
+    Hi:
     <BLANKLINE>
-    school.
+    ALX?
     <BLANKLINE>
-    fooo
-
-Test all delimeters with spaces at end:
-    >>> text_indentation("Hello   :     Holberton    ?    school.    fooo     ")
-    Hello:
+    from.
     <BLANKLINE>
-    Holberton?
+    sudan
+    >>> text_indentation("         Hi   :     ALX    ?    from.    sudan     ")
+    Hi:
     <BLANKLINE>
-    school.
+    ALX?
     <BLANKLINE>
-    fooo
-
-Test just delimeters:
+    from.
+    <BLANKLINE>
+    sudan
+    >>> text_indentation("Hello. inf World. How are you?")
+    Hello.
+    <BLANKLINE>
+    inf World.
+    <BLANKLINE>
+    How are you?
+    <BLANKLINE>
     >>> text_indentation(".?:")
     .
     <BLANKLINE>
@@ -96,22 +85,34 @@ Test just delimeters:
     <BLANKLINE>
     :
     <BLANKLINE>
-
-Test just delimeters 2:
-    >>> text_indentation("     ?   ")
+    >>> text_indentation("     ?      ")
     ?
     <BLANKLINE>
-
-Test nonindent inside indent
-    >>> text_indentation("?Hello.")
+    >>> text_indentation("    :   ")
+    :
+    <BLANKLINE>
+    >>> text_indentation("   .   ")
+    .
+    <BLANKLINE>
+    >>> text_indentation(":Hi.")
+    :
+    <BLANKLINE>
+    Hi.
+    <BLANKLINE>
+    >>> text_indentation("Programming. nan is interesting.")
+    Programming.
+    <BLANKLINE>
+    nan is interesting.
+    <BLANKLINE>    
+    >>> text_indentation("?yes!?")
     ?
     <BLANKLINE>
-    Hello.
+    yes!?
     <BLANKLINE>
 
-Test existing newlines:
-    >>> text_indentation("?\n\n.\n\n:")
+    >>> text_indentation("?\n\n\n.\n\n:")
     ?
+    <BLANKLINE>
     <BLANKLINE>
     <BLANKLINE>
     <BLANKLINE>
@@ -121,15 +122,33 @@ Test existing newlines:
     <BLANKLINE>
     :
     <BLANKLINE>
-
-Test none:
     >>> text_indentation(None)
     Traceback (most recent call last):
     ...
     TypeError: text must be a string
 
-Test number:
-    >>> text_indentation(33)
+    >>> text_indentation(567)
+    Traceback (most recent call last):
+    ...
+    TypeError: text must be a string
+
+    >>> text_indentation(-567)
+    Traceback (most recent call last):
+    ...
+    TypeError: text must be a string
+    
+    >>> text_indentation(0.3)
+    Traceback (most recent call last):
+    ...
+    TypeError: text must be a string
+    
+
+    >>> text_indentation(3.14)
+    Traceback (most recent call last):
+    ...
+    TypeError: text must be a string
+
+    >>> text_indentation(-3.14)
     Traceback (most recent call last):
     ...
     TypeError: text must be a string
