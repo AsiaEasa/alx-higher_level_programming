@@ -57,7 +57,8 @@ class TestMaxInteger(unittest.TestCase):
 
     def test_ints_and_floats(self):
 	"""Unittest for max_integer"""
-        self.assertEqual(max_integer([50, 50.8, -500, -0.5, 5000, 7000, -500000]), 7000)
+        self.assertEqual(
+	    max_integer([50, 50.8, -500, -0.5, 5000, 7000, -500000]), 7000)
 
     def test_one(self):
 	"""Unittest for max_integer"""
@@ -82,7 +83,10 @@ class TestMaxInteger(unittest.TestCase):
 
     def test_ints_and_floats(self):
 	"""Unittest for max_integer"""
-        self.assertEqual(max_integer([50, 50.8, -500, -0.5, 5000, 7000, -500000, 9999999999999999999, -9999999999999999999, 0.0001, -0.0001]), 9999999999999999999)
+        self.assertEqual(
+	    max_integer(
+		[50, 50.8, -500, -0.5, 5000, 7000, -500000, 9999999999999999999, 
+		    -9999999999999999999, 0.0001, -0.0001]), 9999999999999999999)
 
     def test_negatives(self):
         """Unittest for max_integer"""
