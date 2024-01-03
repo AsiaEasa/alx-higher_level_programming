@@ -118,7 +118,6 @@ shapes (2,2) and (1,0) not aligned: 2 (dim 1) != 1 (dim 0)
 ... except Exception as te:
 ...	print(te)
 lazy_matrix_mul() missing 1 required positional argument: 'm_b'
-
 >>> try:
 ...	print(matrix_mul())
 ... except Exception as te:
