@@ -2,20 +2,13 @@
 """
 This module defines a function that prints the given first and last names.
 Functions:
-    say_my_name(first_name, last_name=""): Prints My name is <first name> <last name>.
+    say_my_name(first_name, last_name="").
 """
+
 
 def say_my_name(first_name, last_name=""):
     """
     Prints My name is <first name> <last name>.
-
-    Args:
-        first_name (str): The first name.
-        last_name (str): The last name. Defaults to an empty string.
-
-    Raises:
-        TypeError: If first_name or last_name is not a string.
-
     """
 
     # Check if first_name is a string
@@ -28,6 +21,8 @@ def say_my_name(first_name, last_name=""):
 
     # Print the formatted message
     print("My name is {:s} {:s}".format(first_name, last_name))
+
+
 if __name__ == "__main__":
     import doctest
     doctest.testfile("tests/3-say_my_name.txt")
