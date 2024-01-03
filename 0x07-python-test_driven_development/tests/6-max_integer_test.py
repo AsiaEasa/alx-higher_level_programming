@@ -2,7 +2,6 @@
 """Unittest for max_integer([..])
 """
 import unittest
-
 max_integer = __import__("6-max_integer").max_integer
 
 
@@ -30,13 +29,13 @@ class TestMaxInteger(unittest.TestCase):
     def test_empty_list(self):
         self.assertIsNone(max_integer([]))
 
-    def test_negative_numbers(self):
+    def test_n_numbers(self):
         self.assertEqual(max_integer([-1, -5, -3]), -1)
 
-    def test_mixed_numbers(self):
+    def test_mixed(self):
         self.assertEqual(max_integer([-1, 5, 0]), 5)
 
-    def test_float_numbers(self):
+    def test_float(self):
         self.assertEqual(max_integer([-1.5, -2.5, -3.5]), -1.5)
 
     def test_one(self):
@@ -45,10 +44,10 @@ class TestMaxInteger(unittest.TestCase):
     def test_numeric_string(self):
         self.assertEqual(max_integer("82625417398473"), "9")
 
-    def test_float_numbers(self):
+    def test_float(self):
         self.assertEqual(max_integer([1.5, 2.5, 3.5]), 3.5)
 
-    def test_mixed_numbers(self):
+    def test_mixed(self):
         self.assertEqual(max_integer([1.5, -2.5, 3.5]), 3.5)
 
     def test_floats(self):
@@ -70,10 +69,10 @@ class TestMaxInteger(unittest.TestCase):
             0.867091,
         )
 
-    def test_max_start(self):
+    def test_max(self):
         self.assertEqual(max_integer([8, 6, 3]), 8)
 
-    def test_positives_and_negatives_large(self):
+    def test_p_and_n_large(self):
         """Unittest for max_integer([..])"""
         self.assertEqual(
             max_integer(
@@ -170,7 +169,7 @@ class TestMaxInteger(unittest.TestCase):
             9876,
         )
 
-    def test_negatives(self):
+    def test_neg(self):
         """Unittest for max_integer([..])"""
         self.assertEqual(
             max_integer(
@@ -499,3 +498,60 @@ class TestMaxInteger(unittest.TestCase):
             ),
             29.496355326217377,
         )
+
+    def test_ch_in(self):
+        """Unittest for max_integer with char  input"""
+        self.assertEqual(max_integer("Hollton"), "t")
+
+    def test_of_lists(self):
+        """Unittest for max_integer with lists"""
+        self.assertEqual(max_integer([[], [2], [4], [2, 9]]), [4])
+
+    def test_str_list_in(self):
+        """Unittest for max_integer with list string input"""
+        self.assertEqual(
+            max_integer([["foo"], ["boo"], ["abc"], ["yic"], ["aic"]]), ["yic"]
+        )
+
+    def test_inf(self):
+        """Unittest for max_integer([..])"""
+        self.assertEqual(max_integer([99, float('inf'), float('-inf')]),
+                         float('inf'))
+
+    def test_nan_in(self):
+        """Unittest for max_integer with nan input"""
+        self.assertEqual(max_integer([9, float("nan"), 1000]), 1000)
+
+    def test_mixed_list(self):
+        """Unittest for max_integer with mix"""
+        with self.assertRaises(TypeError):
+            max_integer([[], [2], [4], [2, 9], 99, "foo"])
+
+    def test_D_list(self):
+        """Unittest for max_integer with D-type"""
+        with self.assertRaises(TypeError):
+            max_integer([99, "foo"])
+
+    def test_input_none(self):
+        """Unittest for max_integer with None"""
+        with self.assertRaises(TypeError):
+            max_integer(None)
+
+    def test_dict_in(self):
+        """Unittest for max_integer with dict input"""
+        with self.assertRaises(TypeError):
+            max_integer([{20: 23, 14: 45}, {"a": "b"}])
+
+    def test_int_in(self):
+        """Unittest for max_integer with int input"""
+        with self.assertRaises(TypeError):
+            max_integer(98)
+
+    def test_float_in(self):
+        """Unittest for max_integer with float input"""
+        with self.assertRaises(TypeError):
+            max_integer(9.8)
+
+
+if __name__ == "__main__":
+    unittest.main()
