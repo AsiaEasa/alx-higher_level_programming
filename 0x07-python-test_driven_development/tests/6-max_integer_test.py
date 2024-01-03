@@ -56,6 +56,13 @@ class TestMaxInteger(unittest.TestCase):
         expected_result = 7000
         self.assertEqual(max_integer(input_list), expected_result)
 
+    def test_ints_and_floats(self):
+        """Unittest for max_integer"""
+        input_list = [50, 50.8, -500, -0.5, 5000, 7000, -500000,
+                      9999999999999999, -99999999999999999, 0.0001, -0.0001]
+        expected_result = 9999999999999999
+        self.assertEqual(max_integer(input_list), expected_result)
+
     def test_floats(self):
         """Unittest for max_integer"""
         self.assertEqual(
