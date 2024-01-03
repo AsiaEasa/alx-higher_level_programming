@@ -3,11 +3,11 @@ Import module:
 
 
     >>> matrix = [
-    ...    [1, 2, 3],
-    ...    [4, 5, 6]
+    ...    [10, 20, 33],
+    ...    [40, 55, 66]
     ... ]
-    >>> matrix_divided(matrix, 3)
-    [[0.33, 0.67, 1.0], [1.33, 1.67, 2.0]]
+    >>> matrix_divided(matrix, 10)
+    [[1.0, 2.0, 3.3], [4.0, 5.5, 6.6]]
 
     >>> matrix_divided("foo", 1)
     Traceback (most recent call last):
@@ -27,11 +27,11 @@ Import module:
         ...
     TypeError: Each row of the matrix must have the same size
 
-    >>> matrix_divided([[2, 4, 8], [1, 2, 3]], float('inf'))
+    >>> matrix_divided([[72, 49,58], [71, 52,53]], float('inf'))
     [[0.0, 0.0, 0.0], [0.0, 0.0, 0.0]]
 
 
-    >>> matrix_divided([[2, 4, 8], [1, 2, 3]], float('nan'))
+    >>> matrix_divided([[12, 34, 80], [14, 27, 30]], float('nan'))
     [[nan, nan, nan], [nan, nan, nan]]
 
     >>> matrix = [
@@ -50,8 +50,8 @@ Import module:
     TypeError: matrix_divided() missing 2 required positional arguments: 'matrix' and 'div'
 
     >>> matrix = [
-    ...    [1, 2, 3],
-    ...    [4, 5, 6]
+    ...    [91, 28, 73],
+    ...    [45, 5, 56]
     ... ]
     >>> matrix_divided(matrix, 'abc')
     Traceback (most recent call last):
@@ -104,3 +104,28 @@ Import module:
     Traceback (most recent call last):
     ...
     TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+    >>> matrix = [
+    ...    [1, 2.9, 3],
+    ...    [40, 5, 6]
+    ... ]
+    >>> matrix_divided(matrix, 'S')
+    Traceback (most recent call last):
+        ...
+    TypeError: div must be a number
+   
+    >>> matrix = [
+    ...    [10, 2, 3],
+    ...    [5, 19],
+    ...    [7, 8]
+    ... ]
+    >>> matrix_divided(matrix, 2)
+    Traceback (most recent call last):
+        ...
+    TypeError: Each row of the matrix must have the same size
+
+    >>> print(matrix_divided([[2, 4, 8], [1, 2, 3]], -3.5))
+    [[-0.57, -1.14, -2.29], [-0.29, -0.57, -0.86]]
+
+    >>> print(matrix_divided([[2, 4, 8], [1, 2, 3]], 3.5))
+    [[0.57, 1.14, 2.29], [0.29, 0.57, 0.86]]
