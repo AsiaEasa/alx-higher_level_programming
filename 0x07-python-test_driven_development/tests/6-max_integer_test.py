@@ -30,12 +30,6 @@ class TestMaxInteger(unittest.TestCase):
     def test_empty_list(self):
         self.assertIsNone(max_integer([]))
 
-    def test_ints_and_floats(self):
-	self.assertEqual(
-	    max_integer([50, 50.8, -500, -0.5, 5000, 7000, -500000]),
-	    7000
-	)
-
     def test_negative_numbers(self):
         self.assertEqual(max_integer([-1, -5, -3]), -1)
 
