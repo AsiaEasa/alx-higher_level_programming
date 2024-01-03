@@ -22,41 +22,53 @@ class TestMaxInteger(unittest.TestCase):
     def test_max_start(self):
         """Unittest for max_integer"""
         self.assertEqual(max_integer([8, 6, 3]), 8)
-    
+
     def test_normal_list(self):
-        self.assertEqual(max_integer([1, 2, 3, 4]), 4)
+        """Unittest for max_integer"""
+	self.assertEqual(max_integer([1, 2, 3, 4]), 4)
 
     def test_unsorted_list(self):
-        self.assertEqual(max_integer([1, 3, 4, 2]), 4)
+	"""Unittest for max_integer"""
+	self.assertEqual(max_integer([1, 3, 4, 2]), 4)
 
     def test_empty_list(self):
-        self.assertIsNone(max_integer([]))
+	"""Unittest for max_integer"""
+	self.assertIsNone(max_integer([]))
 
     def test_negative_numbers(self):
-        self.assertEqual(max_integer([-1, -5, -3]), -1)
+	"""Unittest for max_integer"""
+	self.assertEqual(max_integer([-1, -5, -3]), -1)
 
     def test_mixed_numbers(self):
+	"""Unittest for max_integer"""
         self.assertEqual(max_integer([-1, 5, 0]), 5)
 
     def test_float_numbers(self):
+	"""Unittest for max_integer"""
         self.assertEqual(max_integer([1.5, 2.5, 3.5]), 3.5)
 
     def test_float_numbers(self):
+	"""Unittest for max_integer"""
         self.assertEqual(max_integer([-1.5, -2.5, -3.5]), -1.5)
 
     def test_mixed_numbers(self):
+	"""Unittest for max_integer"""
         self.assertEqual(max_integer([1.5, -2.5, 3.5]), 3.5)
 
     def test_ints_and_floats(self):
+	"""Unittest for max_integer"""
         self.assertEqual(max_integer([50, 50.8, -500, -0.5, 5000, 7000, -500000]), 7000)
 
     def test_one(self):
+	"""Unittest for max_integer"""
         self.assertEqual(max_integer([200]), 200)
 
     def test_numeric_string(self):
+	"""Unittest for max_integer"""
         self.assertEqual(max_integer("82625417398473"), "9")
 
     def test_positives_and_negatives_large(self):
+	"""Unittest for max_integer"""
         self.assertEqual(max_integer(
             [-6351, 9735, -8649, 4405, 6261, -1907, -9443, -6308,
                 7474, -2513, 5721, 2319, 74, 7946, -5544, 7693, -7013,
@@ -69,10 +81,11 @@ class TestMaxInteger(unittest.TestCase):
                 899, -3432, -2550, -3353, 6944, 9623]), 9876)
 
     def test_ints_and_floats(self):
+	"""Unittest for max_integer"""
         self.assertEqual(max_integer([50, 50.8, -500, -0.5, 5000, 7000, -500000, 9999999999999999999, -9999999999999999999, 0.0001, -0.0001]), 9999999999999999999)
 
     def test_negatives(self):
-        """Unittest for max_integer([..])"""
+        """Unittest for max_integer"""
         self.assertEqual(
         max_integer(
             [-6105618, -854849, -562552, -3088955, -6711290, -4817844,
@@ -97,7 +110,7 @@ class TestMaxInteger(unittest.TestCase):
                 -2839083, -2586661, -9941097, -3136620]), -71560)
 
     def test_ints_and_floats_large(self):
-        """Unittest for max_integer([..])"""
+        """Unittest for max_integer"""
         self.assertEqual(
         max_integer(
             [199872.761905, 115249.881356, 37972.944444, 120549.903226,
@@ -128,14 +141,14 @@ class TestMaxInteger(unittest.TestCase):
                 571618.5, 35977.166667, 142333.117647, 199123.75]), 2503568)
 
     def test_floats(self):
-        """Unittest for max_integer([..])"""
+        """Unittest for max_integer"""
         self.assertEqual(
         max_integer(
             [0.00124, 0.457569, 0.02346, 0.23423435, 0.45675675, 0.678679,
                 0.867091, 0.74654, 0.5745376]), 0.867091)
 
     def test_floats_large(self):
-        """Unittest for max_integer([..])"""
+        """Unittest for max_integer"""
         self.assertEqual(
         max_integer(
             [0.3670144948698114, 0.22932193120425425, 17.269673745943178,
