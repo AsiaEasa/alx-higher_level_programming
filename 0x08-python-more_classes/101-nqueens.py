@@ -29,7 +29,8 @@ def get_solution(board):
 
 def xout(chessboard, row_played, col_played):
     """X out spots on a chessboard."""
-    directions = [(1, 0), (-1, 0), (0, 1), (0, -1), (1, 1), (-1, -1), (1, -1), (-1, 1)]
+    directions = [(1, 0), (-1, 0), (0, 1),
+                  (0, -1), (1, 1), (-1, -1), (1, -1), (-1, 1)]
 
     for dr, dc in directions:
         r, c = row_played + dr, col_played + dc
@@ -51,7 +52,8 @@ def recursive_solve(chessboard, current_row, queens_placed, result_solutions):
             tmp_chessboard[current_row][col] = "Q"
             xout(tmp_chessboard, current_row, col)
             result_solutions = recursive_solve(
-                tmp_chessboard, current_row + 1, queens_placed + 1, result_solutions
+                tmp_chessboard, current_row + 1,
+                queens_placed + 1, result_solutions
             )
 
     return result_solutions
