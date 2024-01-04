@@ -55,17 +55,17 @@ class Rectangle:
             return (0)
         return ((self.__width * 2) + (self.__height * 2))
 
-    def __str__(self):
-        """Method to create a string of a rectangle"""
-        if self.__width == 0 or self.__height == 0:
-            return ("")
+   def __str__(self):
+    """Method to create a string of a rectangle"""
+    if self.__width == 0 or self.__height == 0:
+        return ""
 
-        rect = []
-        for i in range(self.__height):
-            [rect.append('#') for j in range(self.__width)]
-            if i != self.__height - 1:
-                rect.append("\n")
-        return ("".join(rect))
+    rect = []
+    for i in range(self.__height):
+        [rect.append(self.print_symbol) for j in range(self.__width)]
+        if i != self.__height - 1:
+            rect.append("\n")
+    return "".join(rect)
 
     def __repr__(self):
         """return a string representation of the rectangle"""
