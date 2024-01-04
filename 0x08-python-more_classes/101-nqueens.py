@@ -38,46 +38,32 @@ def xout(chessboard, row_played, col_played):
         row_played (int): The row where a queen was last played.
         col_played (int): The column where a queen was last played.
     """
-    # X out all forward spots
-    for c in range(col_played + 1, len(chessboard)):
-        chessboard[row_played][c] = "x"
-    # X out all backward spots
-    for c in range(col_played - 1, -1, -1):
-        chessboard[row_played][c] = "x"
-    # X out all spots below
-    for r in range(row_played + 1, len(chessboard)):
-        chessboard[r][col_played] = "x"
-    # X out all spots above
-    for r in range(row_played - 1, -1, -1):
-        chessboard[r][col_played] = "x"
-    # X out all spots diagonally down to the right
-    c = col_played + 1
-    for r in range(row_played + 1, len(chessboard)):
-        if c >= len(chessboard):
+    size = len(chessboard)
+    
+    for i in range(size):
+        chessboard[row_played][i] = "x"  # X out row
+        chessboard[i][col_played] = "x"  # X out column
+        
+    # X out diagonals
+    for r, c in zip(range(row_played + 1, size), range(col_played + 1, size)):
+        if r >= size or c >= size:
             break
-        chessboard[r][c] = "x"
-        c += 1
-    # X out all spots diagonally up to the left
-    c = col_played - 1
-    for r in range(row_played - 1, -1, -1):
-        if c < 0:
+        chessboard[r][c] = "x"  # Diagonal down to the right
+        
+    for r, c in zip(range(row_played - 1, -1, -1), range(col_played + 1, size)):
+        if r < 0 or c >= size:
             break
-        chessboard[r][c]
-        c -= 1
-    # X out all spots diagonally up to the right
-    c = col_played + 1
-    for r in range(row_played - 1, -1, -1):
-        if c >= len(chessboard):
+        chessboard[r][c] = "x"  # Diagonal up to the right
+        
+    for r, c in zip(range(row_played + 1, size), range(col_played - 1, -1, -1)):
+        if r >= size or c < 0:
             break
-        chessboard[r][c] = "x"
-        c += 1
-    # X out all spots diagonally down to the left
-    c = col_played - 1
-    for r in range(row_played + 1, len(chessboard)):
-        if c < 0:
+        chessboard[r][c] = "x"  # Diagonal down to the left
+        
+    for r, c in zip(range(row_played - 1, -1, -1), range(col_played - 1, -1, -1)):
+        if r < 0 or c < 0:
             break
-        chessboard[r][c] = "x"
-        c -= 1
+        chessboard[r][c] = "x"  # Diagonal up to the left
 
 
 def recursive_solve(board, row, queens, sol):
