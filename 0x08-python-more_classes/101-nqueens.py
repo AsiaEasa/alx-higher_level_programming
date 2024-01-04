@@ -19,7 +19,11 @@ def board_deepcopy(bo):
 
 def get_solution(board):
     """Return the list of lists representation of a solved chessboard."""
-    return [[r, c] for r in range(len(board)) for c in range(len(board)) if board[r][c] == "Q"]
+    return [
+        [r, c]
+        for r in range(len(board))
+        for c in range(len(board)) if board[r][c] == "Q"
+    ]
 
 
 def xout(board, row, col):
