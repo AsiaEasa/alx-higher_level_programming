@@ -79,19 +79,21 @@ def xout(board, row, col):
         c -= 1
 
 
-def recursive_solve(board, row, queens, solutions):
+def recursive_solve(board, row, queens, sol):
     """Recursively solve an N-queens puzzle."""
     if queens == len(board):
-        solutions.append(board)
-        return solutions
+        solutions.append(get_solution(board))
+        return (sol)
 
     for c in range(len(board)):
         if board[row][c] == " ":
-            tmp_board = [row[:] for row in board]
+            tmp_board = board_deepcopy(board)
             tmp_board[row][c] = "Q"
-            solutions = recursive_solve(tmp_board, row + 1, queens + 1, solutions)
+            xout(tmp_board, row, c)
+            sol = recursive_solve(tmp_board, row + 1,
+                                        queens + 1, sol)
 
-    return solutions
+    return (sol)
 
 
 if __name__ == "__main__":
