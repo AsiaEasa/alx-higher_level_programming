@@ -81,19 +81,24 @@ def xout(board, row, col):
 
 def recursive_solve(board, row, queens, solutions):
     """Recursively solve an N-queens puzzle."""
-    if queens == len(board):
-        solutions.append(get_solution(board))
-        return (solutions)
+    def is_safe(board, row, col):
+        """Check if placing a queen at a specific position is safe."""
+        return all(board[i] != col and board[i] - i != col - row and board[i] + i != col + row for i in range(row))
 
-    for c in range(len(board)):
-        if board[row][c] == " ":
-            tmp_board = board_deepcopy(board)
-            tmp_board[row][c] = "Q"
-            xout(tmp_board, row, c)
-            solutions = recursive_solve(tmp_board, row + 1,
-                                        queens + 1, solutions)
+    def place_queen(board, row, solutions):
+        """Place queens recursively on the board."""
+        if row == n:
+            solutions.append(board[:])  # Append a copy of the solution
+            return
 
-    return (solutions)
+        for col in range(n):
+            if is_safe(board, row, col):
+                board[row] = col
+                place_queen(board, row + 1, solutions)
+
+    solutions = []
+    place_queen([-1] * n, 0, solutions)
+    return solutions
 
 
 if __name__ == "__main__":
