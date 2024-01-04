@@ -28,16 +28,7 @@ def get_solution(board):
 
 
 def xout(chessboard, row_played, col_played):
-    """X out spots on a chessboard.
-
-    All spots where non-attacking queens can no
-    longer be played are X-ed out.
-
-    Args:
-        chessboard (list): The current working chessboard.
-        row_played (int): The row where a queen was last played.
-        col_played (int): The column where a queen was last played.
-    """
+    """X out spots on a chessboard."""
     directions = [(1, 0), (-1, 0), (0, 1), (0, -1), (1, 1), (-1, -1), (1, -1), (-1, 1)]
 
     for dr, dc in directions:
@@ -47,20 +38,22 @@ def xout(chessboard, row_played, col_played):
             r += dr
             c += dc
 
-def recursive_solve(board, row, queens, sol):
+
+def recursive_solve(chessboard, current_row, queens_placed, result_solutions):
     """Recursively solve an N-queens puzzle."""
-    if queens == len(board):
-        sol.append(get_solution(board))
-        return sol
+    if queens_placed == len(chessboard):
+        result_solutions.append(get_solution(chessboard))
+        return result_solutions
 
-    for c in range(len(board)):
-        if board[row][c] == " ":
-            tmp_board = board_deepcopy(board)
-            tmp_board[row][c] = "Q"
-            xout(tmp_board, row, c)
-            sol = recursive_solve(tmp_board, row + 1, queens + 1, sol)
+    for col in range(len(chessboard)):
+        if chessboard[current_row][col] == " ":
+            tmp_chessboard = board_deepcopy(chessboard)
+            tmp_chessboard[current_row][col] = "Q"
+            xout(tmp_chessboard, current_row, col)
+            result_solutions = recursive_solve(tmp_chessboard, current_row + 1,
+                                               queens_placed + 1, result_solutions)
 
-    return sol
+    return result_solutions
 
 
 if __name__ == "__main__":
