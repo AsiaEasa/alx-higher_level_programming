@@ -81,23 +81,16 @@ def xout(board, row, col):
 
 def recursive_solve(board, row, queens, solutions):
     """Recursively solve an N-queens puzzle."""
-    def is_safe(board, row, col):
-        """Check if placing a queen at a specific position is safe."""
-        return all(board[i] != col and board[i] - i != col - row and board[i] + i != col + row for i in range(row))
+    if queens == len(board):
+        solutions.append(board)
+        return solutions
 
-    def place_queen(board, row, solutions):
-        """Place queens recursively on the board."""
-        if row == n:
-            solutions.append(board[:])  # Append a copy of the solution
-            return
+    for c in range(len(board)):
+        if board[row][c] == " ":
+            tmp_board = [row[:] for row in board]
+            tmp_board[row][c] = "Q"
+            solutions = recursive_solve(tmp_board, row + 1, queens + 1, solutions)
 
-        for col in range(n):
-            if is_safe(board, row, col):
-                board[row] = col
-                place_queen(board, row + 1, solutions)
-
-    solutions = []
-    place_queen([-1] * n, 0, solutions)
     return solutions
 
 
