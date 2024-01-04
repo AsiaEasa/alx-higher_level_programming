@@ -82,7 +82,7 @@ def xout(board, row, col):
 def recursive_solve(board, row, queens, sol):
     """Recursively solve an N-queens puzzle."""
     if queens == len(board):
-        solutions.append(get_solution(board))
+        sol.append(get_solution(board))
         return (sol)
 
     for c in range(len(board)):
