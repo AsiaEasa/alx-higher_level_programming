@@ -13,20 +13,20 @@ def init_board(n):
 
 def board_deepcopy(bo):
     """Return a deepcopy"""
-    if isinstance(bo, list):
+    if type(bo) is list:
         return list(map(board_deepcopy, bo))
     return (bo)
 
 
-def get_solution(bo):
+def get_solution(board):
     """Return the list of lists representation of a solved chessboard."""
-    sol = []
-    for m in range(len(bo)):
-        for n in range(len(bo)):
-            if board[m][n] == "Q":
-                sol.append([m, n])
+    solution = []
+    for r in range(len(board)):
+        for c in range(len(board)):
+            if board[r][c] == "Q":
+                solution.append([r, c])
                 break
-    return (sol)
+    return (solution)
 
 
 def xout(board, row, col):
