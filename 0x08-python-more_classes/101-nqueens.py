@@ -13,7 +13,7 @@ def init_board(n):
 
 def board_deepcopy(bo):
     """Return a deepcopy"""
-    if type(bo) is list:
+    if isinstance(bo, list):
         return list(map(board_deepcopy, bo))
     return (bo)
 
