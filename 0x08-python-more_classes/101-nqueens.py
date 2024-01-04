@@ -27,56 +27,56 @@ def get_solution(board):
     ]
 
 
-def xout(board, row, col):
+def xout(chessboard, row_played, col_played):
     """X out spots on a chessboard.
 
     All spots where non-attacking queens can no
     longer be played are X-ed out.
 
     Args:
-        board (list): The current working chessboard.
-        row (int): The row where a queen was last played.
-        col (int): The column where a queen was last played.
+        chessboard (list): The current working chessboard.
+        row_played (int): The row where a queen was last played.
+        col_played (int): The column where a queen was last played.
     """
     # X out all forward spots
-    for c in range(col + 1, len(board)):
-        board[row][c] = "x"
-    # X out all backwards spots
-    for c in range(col - 1, -1, -1):
-        board[row][c] = "x"
+    for c in range(col_played + 1, len(chessboard)):
+        chessboard[row_played][c] = "x"
+    # X out all backward spots
+    for c in range(col_played - 1, -1, -1):
+        chessboard[row_played][c] = "x"
     # X out all spots below
-    for r in range(row + 1, len(board)):
-        board[r][col] = "x"
+    for r in range(row_played + 1, len(chessboard)):
+        chessboard[r][col_played] = "x"
     # X out all spots above
-    for r in range(row - 1, -1, -1):
-        board[r][col] = "x"
+    for r in range(row_played - 1, -1, -1):
+        chessboard[r][col_played] = "x"
     # X out all spots diagonally down to the right
-    c = col + 1
-    for r in range(row + 1, len(board)):
-        if c >= len(board):
+    c = col_played + 1
+    for r in range(row_played + 1, len(chessboard)):
+        if c >= len(chessboard):
             break
-        board[r][c] = "x"
+        chessboard[r][c] = "x"
         c += 1
     # X out all spots diagonally up to the left
-    c = col - 1
-    for r in range(row - 1, -1, -1):
+    c = col_played - 1
+    for r in range(row_played - 1, -1, -1):
         if c < 0:
             break
-        board[r][c]
+        chessboard[r][c]
         c -= 1
     # X out all spots diagonally up to the right
-    c = col + 1
-    for r in range(row - 1, -1, -1):
-        if c >= len(board):
+    c = col_played + 1
+    for r in range(row_played - 1, -1, -1):
+        if c >= len(chessboard):
             break
-        board[r][c] = "x"
+        chessboard[r][c] = "x"
         c += 1
     # X out all spots diagonally down to the left
-    c = col - 1
-    for r in range(row + 1, len(board)):
+    c = col_played - 1
+    for r in range(row_played + 1, len(chessboard)):
         if c < 0:
             break
-        board[r][c] = "x"
+        chessboard[r][c] = "x"
         c -= 1
 
 
