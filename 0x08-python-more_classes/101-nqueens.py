@@ -1,49 +1,32 @@
 #!/usr/bin/python3
-"""Solves the N-queens puzzle.
-
-Determines all possible solutions to placing N
-N non-attacking queens on an NxN chessboard.
-
-Example:
-    $ ./101-nqueens.py N
-
-N must be an integer greater than or equal to 4.
-
-Attributes:
-    board (list): A list of lists representing the chessboard.
-    solutions (list): A list of lists containing solutions.
-
-Solutions are represented in the format [[r, c], [r, c], [r, c], [r, c]]
-where `r` and `c` represent the row and column, respectively, where a
-queen must be placed on the chessboard.
-"""
+"""Solves the N-queens puzzle."""
 import sys
 
 
 def init_board(n):
     """Initialize an `n`x`n` sized chessboard with 0's."""
-    board = []
-    [board.append([]) for i in range(n)]
-    [row.append(' ') for i in range(n) for row in board]
-    return (board)
+    bo = []
+    [bo.append([]) for i in range(n)]
+    [row.append(' ') for i in range(n) for row in bo]
+    return (bo)
 
 
-def board_deepcopy(board):
-    """Return a deepcopy of a chessboard."""
-    if isinstance(board, list):
-        return list(map(board_deepcopy, board))
-    return (board)
+def board_deepcopy(bo):
+    """Return a deepcopy"""
+    if type(bo) is list:
+        return list(map(board_deepcopy, bo))
+    return (bo)
 
 
-def get_solution(board):
+def get_solution(bo):
     """Return the list of lists representation of a solved chessboard."""
-    solution = []
-    for r in range(len(board)):
-        for c in range(len(board)):
-            if board[r][c] == "Q":
-                solution.append([r, c])
+    sol = []
+    for m in range(len(bo)):
+        for n in range(len(bo)):
+            if board[m][n] == "Q":
+                sol.append([m, n])
                 break
-    return (solution)
+    return (sol)
 
 
 def xout(board, row, col):
