@@ -6,7 +6,7 @@
 #include <unicodeobject.h>
 
 /**
- * print_python_sting - prints about python strings
+ * print_python_string - prints about python strings
  * @p: address of pyobject
  */
 void print_python_string(PyObject *p)
