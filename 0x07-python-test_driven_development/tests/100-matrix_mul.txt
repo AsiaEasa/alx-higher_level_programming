@@ -143,6 +143,16 @@ Import module:
    
     >>> matrix_mul([[-11, -22], [-33, -44]], [[11, 22], [33, 44]])
     [[-847, -1210], [-1815, -2662]]
-    
+
+    >>> matrix_mul([[5, 6, 10], [7, 8]], [[5, 6], [7, 8]])
+    Traceback (most recent call last):
+    ...
+    TypeError: each row of m_a must should be of the same size
+
+    >>> matrix_mul([[5, 6], [7, 8]], [[5, 6, 1], [7, 8]])
+    Traceback (most recent call last):
+    ...
+    TypeError: each row of m_b must should be of the same size
+
     >>> matrix_mul([[0.1, 0.1], [0.44, 0.3]], [[1.5, 3.2], [3.8, 4.8]])
     [[0.53, 0.8], [1.7999999999999998, 2.848]]
