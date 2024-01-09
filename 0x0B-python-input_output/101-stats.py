@@ -7,6 +7,7 @@ prints the following statistics:
     - Count of read status codes up to that point.
 """
 
+import sys
 
 def print_stats(size, status_codes):
     """Print accumulated metrics.
@@ -15,17 +16,15 @@ def print_stats(size, status_codes):
         size (int): The accumulated read file size.
         status_codes (dict): The accumulated count of status codes.
     """
-    print("File size: {}".format(size))
-    for key in sorted(status_codes):
-        print("{}: {}".format(key, status_codes[key]))
+    print(f"Total Size: {size}")
+    print("Status Codes:")
+    for code, count in sorted(status_codes.items()):
+        print(f"  {code}: {count}")
 
-
-if __name__ == "__main__":
-    import sys
-
+def process_log():
     size = 0
     status_codes = {}
-    valid_codes = ['200', '301', '400', '401', '403', '404', '405', '500']
+    valid_codes = {'200', '301', '400', '401', '403', '404', '405', '500'}
     count = 0
 
     try:
@@ -36,20 +35,12 @@ if __name__ == "__main__":
             else:
                 count += 1
 
-            line = line.split()
-
             try:
-                size += int(line[-1])
+                parts = line.split()
+                size += int(parts[-1])
+                if parts[-2] in valid_codes:
+                    status_codes[parts[-2]] = status_codes.get(parts[-2], 0) + 1
             except (IndexError, ValueError):
-                pass
-
-            try:
-                if line[-2] in valid_codes:
-                    if status_codes.get(line[-2], -1) == -1:
-                        status_codes[line[-2]] = 1
-                    else:
-                        status_codes[line[-2]] += 1
-            except IndexError:
                 pass
 
         print_stats(size, status_codes)
@@ -57,3 +48,6 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         print_stats(size, status_codes)
         raise
+
+if __name__ == "__main__":
+    process_log()
