@@ -9,6 +9,7 @@ def print_stats(size, status_codes):
     for k in sorted(status_codes):
         print("{}: {}".format(k, status_codes[k]))
 
+
 def p_log():
     """print matrics"""
     import sys
@@ -19,26 +20,26 @@ def p_log():
     c_t = 0
 
     try:
-        for l in sys.stdin:
+        for line in sys.stdin:
             if c_t != 10:
                 c_t += 1
             else:
                 print_stats(s, s_codes)
                 c_t = 1
 
-            l = l.split()
+            line = line.split()
 
             try:
-                s += int(l[-1])
+                s += int(line[-1])
             except (IndexError, ValueError):
                 pass
 
             try:
-                if l[-2] in v_codes:
-                    if s_codes.get(l[-2], -1) == -1:
-                        s_codes[l[-2]] = 1
+                if line[-2] in v_codes:
+                    if s_codes.get(line[-2], -1) == -1:
+                        s_codes[line[-2]] = 1
                     else:
-                        s_codes[l[-2]] += 1
+                        s_codes[line[-2]] += 1
             except IndexError:
                 pass
 
