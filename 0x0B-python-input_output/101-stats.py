@@ -1,16 +1,15 @@
 #!/usr/bin/python3
 """Reads from standard input and computes metrics.
-
-After every ten lines or the input of a keyboard interruption (CTRL + C),
-prints the following statistics:
-    - Total file size up to that point.
-    - Count of read status codes up to that point.
 """
 
 
 def print_stats(size, status_codes):
 
-if __name__ == "__main__":
+    print("File size: {}".format(size))
+    for k in sorted(status_codes):
+        print("{}: {}".format(k, status_codes[k]))
+
+def p_log():
     import sys
 
     size = 0
@@ -20,31 +19,34 @@ if __name__ == "__main__":
 
     try:
         for line in sys.stdin:
-            count += 1
             if count == 10:
-                print("File size:", size)
-                for key in sorted(status_codes):
-                    print(f"{key}: {status_codes[key]}")
-                count = 0
+                print_stats(size, status_codes)
+                count = 1
+            else:
+                count += 1
 
-            parts = line.split()
+            line = line.split()
+
             try:
-                size += int(parts[-1])
+                size += int(line[-1])
             except (IndexError, ValueError):
                 pass
 
             try:
-                if parts[-2] in valid_codes:
-                    status_codes[parts[-2]] = status_codes.get(parts[-2], 0) + 1
+                if line[-2] in valid_codes:
+                    if status_codes.get(line[-2], -1) == -1:
+                        status_codes[line[-2]] = 1
+                    else:
+                        status_codes[line[-2]] += 1
             except IndexError:
                 pass
 
-        print("File size:", size)
-        for key in sorted(status_codes):
-            print(f"{key}: {status_codes[key]}")
+        print_stats(size, status_codes)
 
     except KeyboardInterrupt:
-        print("File size:", size)
-        for key in sorted(status_codes):
-            print(f"{key}: {status_codes[key]}")
+        print_stats(size, status_codes)
         raise
+
+
+if __name__ == "__main__":
+    p_log()
