@@ -4,47 +4,48 @@
 
 
 def print_stats(size, status_codes):
-
+    """"to print stats"""
     print("File size: {}".format(size))
     for k in sorted(status_codes):
         print("{}: {}".format(k, status_codes[k]))
 
 def p_log():
+    """print matrics"""
     import sys
 
-    size = 0
-    status_codes = {}
-    valid_codes = ['200', '301', '400', '401', '403', '404', '405', '500']
-    count = 0
+    s = 0
+    s_codes = {}
+    v_codes = ['200', '301', '400', '401', '403', '404', '405', '500']
+    c_t = 0
 
     try:
-        for line in sys.stdin:
-            if count == 10:
-                print_stats(size, status_codes)
-                count = 1
+        for l in sys.stdin:
+            if c_t != 10:
+                c_t += 1
             else:
-                count += 1
+                print_stats(s, s_codes)
+                c_t = 1
 
-            line = line.split()
+            l = l.split()
 
             try:
-                size += int(line[-1])
+                s += int(l[-1])
             except (IndexError, ValueError):
                 pass
 
             try:
-                if line[-2] in valid_codes:
-                    if status_codes.get(line[-2], -1) == -1:
-                        status_codes[line[-2]] = 1
+                if l[-2] in v_codes:
+                    if s_codes.get(l[-2], -1) == -1:
+                        s_codes[l[-2]] = 1
                     else:
-                        status_codes[line[-2]] += 1
+                        s_codes[l[-2]] += 1
             except IndexError:
                 pass
 
-        print_stats(size, status_codes)
+        print_stats(s, s_codes)
 
     except KeyboardInterrupt:
-        print_stats(size, status_codes)
+        print_stats(s, s_codes)
         raise
 
 
