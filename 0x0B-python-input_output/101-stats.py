@@ -28,21 +28,19 @@ def process_log():
 
     try:
         for line in sys.stdin:
-            if count == 10:
-                print_stats(size, status_codes)
-                count = 1
-            else:
-                count += 1
+            count = 1 if count == 10 else count + 1
 
             try:
                 parts = line.split()
                 size += int(parts[-1])
-                if parts[-2] in valid_codes:
-                    status_codes[parts[-2]] = status_codes.get(parts[-2], 0) + 1
+                status_code = parts[-2]
+                if status_code in valid_codes:
+                    status_codes[status_code] = status_codes.get(status_code, 0) + 1
             except (IndexError, ValueError):
                 pass
 
-        print_stats(size, status_codes)
+            if count == 1:
+                print_stats(size, status_codes)
 
     except KeyboardInterrupt:
         print_stats(size, status_codes)
