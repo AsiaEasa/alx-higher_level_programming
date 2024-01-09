@@ -8,6 +8,7 @@ prints the following statistics:
 """
 import sys
 
+
 def print_stats(size, status_codes):
     """Print accumulated metrics.
 
@@ -19,6 +20,7 @@ def print_stats(size, status_codes):
     print("Status Codes:")
     for code, count in sorted(status_codes.items()):
         print(f"  {code}: {count}")
+
 
 def process_log():
     size = 0
@@ -35,7 +37,8 @@ def process_log():
                 size += int(parts[-1])
                 status_code = parts[-2]
                 if status_code in valid_codes:
-                    status_codes[status_code] = status_codes.get(status_code, 0) + 1
+                    existing_count = status_codes.get(status_code, 0)
+                    status_codes[status_code] = existing_count + 1
             except (IndexError, ValueError):
                 pass
 
@@ -45,6 +48,7 @@ def process_log():
     except KeyboardInterrupt:
         print_stats(size, status_codes)
         raise
+
 
 if __name__ == "__main__":
     process_log()
