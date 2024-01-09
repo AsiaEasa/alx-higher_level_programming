@@ -3,7 +3,7 @@
 """
 
 
-def print_stats(size, status_codes):
+def p_stats(size, status_codes):
     """"to print stats"""
     print("File size: {}".format(size))
     for k in sorted(status_codes):
@@ -24,7 +24,7 @@ def p_log():
             if c_t != 10:
                 c_t += 1
             else:
-                print_stats(s, s_codes)
+                p_stats(s, s_codes)
                 c_t = 1
 
             line = line.split()
@@ -36,17 +36,17 @@ def p_log():
 
             try:
                 if line[-2] in v_codes:
-                    if s_codes.get(line[-2], -1) == -1:
-                        s_codes[line[-2]] = 1
-                    else:
+                    if s_codes.get(line[-2], -1) != -1:
                         s_codes[line[-2]] += 1
+                    else:
+                        s_codes[line[-2]] = 1
             except IndexError:
                 pass
 
-        print_stats(s, s_codes)
+        p_stats(s, s_codes)
 
     except KeyboardInterrupt:
-        print_stats(s, s_codes)
+        p_stats(s, s_codes)
         raise
 
 
