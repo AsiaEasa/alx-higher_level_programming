@@ -44,9 +44,9 @@ class Base:
     def create(cls, **dictionary):
         '''Loads instance.'''
         if cls.__name__ == "Rectangle":
-            new = Rectangle(1, 1)
-        if cls.__name__ == "Square":
-            new = Square(1)
+            new = cls(1, 1)
+        elif cls.__name__ == "Square":
+            new = cls(1)
         else:
             new = None
         new.update(**dictionary)
@@ -57,7 +57,7 @@ class Base:
         '''Loads string from file and unjsonifies.'''
         from os import path
         file_name = "{}.json".format(cls.__name__)
-        if not path.isfile(file):
+        if not path.isfile(file_name):
             return []
         with open(file_name, "r", encoding="utf-8") as m:
             return [cls.create(**n) for n in cls.from_json_string(m.read())]
@@ -85,7 +85,7 @@ class Base:
         li_st = []
         with open(file_name, 'r', newline='',
                   encoding='utf-8') as f_csv:
-            read = csv.reader(f)
+            read = csv.reader(f_csv)
             for row in read:
                 row = [int(m) for m in row]
                 if cls.__name__ == "Rectangle":
