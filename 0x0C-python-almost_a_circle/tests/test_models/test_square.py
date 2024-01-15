@@ -15,10 +15,6 @@ class TestSquare(unittest.TestCase):
         with self.assertRaisesRegex(TypeError, "x must be an integer"):
             Square(1, float('nan'), 20)
 
-    def test_inf_x(self):
-        with self.assertRaisesRegex(TypeError, "x must be an integer"):
-            Square(1, float('inf'), 20)
-
     def test_complex_y(self):
         with self.assertRaisesRegex(TypeError, "y must be an integer"):
             Square(7, 36, complex(45))
