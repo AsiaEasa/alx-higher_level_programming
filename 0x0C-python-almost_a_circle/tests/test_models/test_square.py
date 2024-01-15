@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-'''Module for Square unit tests.'''
+'''ModuleSquare'''
 import unittest
 from models.base import Base
 from models.square import Square
@@ -9,7 +9,7 @@ import io
 
 
 class TestSquare(unittest.TestCase):
-    '''Tests the Base class.'''
+    '''Tests Base class.'''
     def test_display(self):
         m = Square(10)
         with self.assertRaises(TypeError) as e:
@@ -68,3 +68,6 @@ class TestSquare(unittest.TestCase):
         ########
 """
         self.assertEqual(f.getvalue(), n)
+
+if __name__ == "__main__":
+    unittest.main()

@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-'''Module for Base unit tests.'''
+'''Module Base'''
 import unittest
 from models.base import Base
 from models.rectangle import Rectangle
@@ -7,7 +7,6 @@ from models.square import Square
 
 class TestBase(unittest.TestCase):
     def test_from_json_string_l(self):
-        '''Tests to_json_string() signature:'''
         with self.assertRaises(TypeError) as m:
             Base.from_json_string()
         n = "from_json_string() missing 1 required positional argument: \
@@ -31,13 +30,13 @@ class TestBase(unittest.TestCase):
         list_out = Rectangle.from_json_string(json_list_in)
         self.assertEqual(list, type(list_out))
 
-    def test_from_json_string_one_rectangle(self):
+    def test_from_json_string_o(self):
         list_in = [{"id": 80, "width": 20, "height": 74, "x": 97}]
         json_list_in = Rectangle.to_json_string(list_in)
         list_out = Rectangle.from_json_string(json_list_in)
         self.assertEqual(list_in, list_out)
 
-    def test_from_json_string_two_rectangles(self):
+    def test_from_json_string_two(self):
         list_in = [
             {"id": 80, "width": 20, "height": 74, "x": 97, "y": 88},
             {"id": 80, "width": 57, "height": 62, "x": 51, "y": 33},
@@ -81,3 +80,6 @@ class TestBase(unittest.TestCase):
         Rectangle.save_to_file([])
         with open("Rectangle.json", "r") as f:
             self.assertEqual(f.read(), "[]")
+
+if __name__ == "__main__":
+    unittest.main()
