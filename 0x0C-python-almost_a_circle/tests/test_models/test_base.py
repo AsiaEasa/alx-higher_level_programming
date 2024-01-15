@@ -14,6 +14,17 @@ class TestBase(unittest.TestCase):
 'json_string'"
         self.assertEqual(str(m.exception), n)
 
+        m = [{}, {}]
+        n = '[{}, {}]'
+        self.assertEqual(Base.from_json_string(n), m)
+        m = [{}]
+        n = '[{}]'
+        self.assertEqual(Base.from_json_string(n), m)
+
+        m = [{"hi": 90}, {"hello": 15}, {"HI": 9}]
+        n = '[{"hi": 90}, {"hello": 15}, {"HI": 9}]'
+        self.assertEqual(Base.from_json_string(n), m)
+
         self.assertEqual(Base.from_json_string(None), [])
         self.assertEqual(Base.from_json_string(""), [])
 
