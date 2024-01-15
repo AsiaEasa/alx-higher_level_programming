@@ -47,7 +47,7 @@ class TestBase(unittest.TestCase):
     def test_unique_id(self):
         self.assertEqual(11, Base(11).id)
 
-    def test_nb_instances_after_unique_id(self):
+    def test_nb_instances(self):
         m = Base()
         n = Base(11)
         r = Base()

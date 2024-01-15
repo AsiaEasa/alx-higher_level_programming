@@ -10,6 +10,16 @@ import io
 
 class TestSquare(unittest.TestCase):
     '''Tests Base class.'''
+
+    def invalid_types(self):
+        n = (3.1, -1.51, float('inf'), float('-inf'), True, "hi", (4,),
+             [4], {4}, {9: 77}, None)
+        return n
+
+    def test_dict_x(self):
+        with self.assertRaisesRegex(TypeError, "x must be an integer"):
+            Square(1, {"a": 4, "b": 5}, 6)
+
     def test_display(self):
         m = Square(10)
         with self.assertRaises(TypeError) as e:
@@ -79,6 +89,13 @@ class TestSquare(unittest.TestCase):
     def test_set_size(self):
         with self.assertRaisesRegex(TypeError, "width must be an integer"):
             Square({7, 2, 7}, 9)
+
+    def test_J_display_no_args(self):
+        m = Square(3)
+        with self.assertRaises(TypeError) as e:
+            Square.display()
+        p = "display() missing 1 required positional argument: 'self'"
+        self.assertEqual(str(e.exception), p)
 
 if __name__ == "__main__":
     unittest.main()
