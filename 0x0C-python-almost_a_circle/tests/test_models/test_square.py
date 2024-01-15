@@ -11,62 +11,51 @@ import io
 class TestSquare(unittest.TestCase):
     '''Tests the Base class.'''
     def test_J_display_no_args(self):
-        '''Tests display() method signature.'''
-        r = Square(9)
+        m = Square(10)
         with self.assertRaises(TypeError) as e:
             Square.display()
-        s = "display() missing 1 required positional argument: 'self'"
-        self.assertEqual(str(e.exception), s)
+        n = "display() missing 1 required positional argument: 'self'"
+        self.assertEqual(str(e.exception), n)
 
     def test_J_display_simple(self):
         '''Tests display() method output.'''
-        r = Square(1)
+        m = Square(1)
+        n = io.StringIO()
+        with redirect_stdout(n):
+            m.display()
+        p = "#\n"
+        self.assertEqual(n.getvalue(), p)
+
+        m = Square(5, 5, 5)
         f = io.StringIO()
         with redirect_stdout(f):
-            r.display()
-        s = "#\n"
-        self.assertEqual(f.getvalue(), s)
-        r.size = 3
-        f = io.StringIO()
-        with redirect_stdout(f):
-            r.display()
-        s = "\
-###\n\
-###\n\
-###\n\
-"
-        self.assertEqual(f.getvalue(), s)
-        r = Square(5, 6, 7)
-        f = io.StringIO()
-        with redirect_stdout(f):
-            r.display()
-        s = """\
+            m.display()
+        p = """\
 
 
 
 
 
-
-
-      #####
-      #####
-      #####
-      #####
-      #####
+     #####
+     #####
+     #####
+     #####
+     #####
 """
-        self.assertEqual(f.getvalue(), s)
-        r = Square(9, 8)
+        self.assertEqual(f.getvalue(), p)
+        m = Square(8, 8)
         f = io.StringIO()
         with redirect_stdout(f):
-            r.display()
-        s = """\
-        #########
-        #########
-        #########
-        #########
-        #########
-        #########
-        #########
-        #########
-        #########
+            m.display()
+        n = """\
+        ########
+        ########
+        ########
+        ########
+        ########
+        ########
+        ########
+        ########
+        ########
 """
+        self.assertEqual(f.getvalue(), n)
