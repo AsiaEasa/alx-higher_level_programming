@@ -69,5 +69,16 @@ class TestSquare(unittest.TestCase):
 """
         self.assertEqual(f.getvalue(), n)
 
+    def test_B_inheritance(self):
+        self.assertTrue(issubclass(Square, Base))
+
+    def test_list_size(self):
+        with self.assertRaisesRegex(TypeError, "width must be an integer"):
+            Square([8, 7, 6])
+
+    def test_set_size(self):
+        with self.assertRaisesRegex(TypeError, "width must be an integer"):
+            Square({7, 2, 7}, 9)
+
 if __name__ == "__main__":
     unittest.main()
