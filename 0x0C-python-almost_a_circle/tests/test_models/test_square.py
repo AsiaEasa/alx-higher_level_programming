@@ -26,6 +26,16 @@ class TestSquare(unittest.TestCase):
         p = "#\n"
         self.assertEqual(n.getvalue(), p)
 
+        m.size = 2
+        n = io.StringIO()
+        with redirect_stdout(n):
+            m.display()
+        p = "\
+##\n\
+##\n\
+"
+        self.assertEqual(n.getvalue(), p)
+
         m = Square(5, 5, 5)
         f = io.StringIO()
         with redirect_stdout(f):
@@ -43,6 +53,7 @@ class TestSquare(unittest.TestCase):
      #####
 """
         self.assertEqual(f.getvalue(), p)
+
         m = Square(8, 8)
         f = io.StringIO()
         with redirect_stdout(f):
