@@ -33,19 +33,19 @@ class TestRectangle(unittest.TestCase):
         msg = "x must be an integer"
         self.assertEqual(str(e.exception), msg)
 
-    def test_to_dictionary_output(self):
-        r = Rectangle(10, 2, 1, 9, 5)
-        correct = {'x': 1, 'y': 9, 'id': 5, 'height': 2, 'width': 10}
-        self.assertDictEqual(correct, r.to_dictionary())
+    def test_to_dictionary_out(self):
+        m = Rectangle(101, 22, 11, 89, 5)
+        c = {'x': 11, 'y': 89, 'id': 5, 'height': 22, 'width': 101}
+        self.assertDictEqual(c, m.to_dictionary())
 
-    def test_to_dictionary_no_object_changes(self):
-        r1 = Rectangle(10, 2, 1, 9, 5)
-        r2 = Rectangle(5, 9, 1, 2, 10)
-        r2.update(**r1.to_dictionary())
-        self.assertNotEqual(r1, r2)
+    def test_to_dictionary_no(self):
+        m1 = Rectangle(1, 3, 11, 8, 6)
+        m2 = Rectangle(6, 8, 11, 3, 1)
+        m2.update(**m1.to_dictionary())
+        self.assertNotEqual(m1, m2)
 
     def test_to_dictionary_arg(self):
-        r = Rectangle(10, 2, 4, 1, 2)
+        r = Rectangle(10, 20, 6, 1, 2)
         with self.assertRaises(TypeError):
             r.to_dictionary(1)
 
