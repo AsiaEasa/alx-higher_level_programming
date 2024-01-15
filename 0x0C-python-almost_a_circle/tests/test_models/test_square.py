@@ -10,10 +10,63 @@ import io
 
 class TestSquare(unittest.TestCase):
     '''Tests the Base class.'''
-    def test_I_area_no_args(self):
-        m = Square(7)
+    def test_J_display_no_args(self):
+        '''Tests display() method signature.'''
+        r = Square(9)
         with self.assertRaises(TypeError) as e:
-            Square.area()
-        n = "area() missing 1 required positional argument: 'self'"
-        self.assertEqual(str(e.exception), n)
+            Square.display()
+        s = "display() missing 1 required positional argument: 'self'"
+        self.assertEqual(str(e.exception), s)
 
+    def test_J_display_simple(self):
+        '''Tests display() method output.'''
+        r = Square(1)
+        f = io.StringIO()
+        with redirect_stdout(f):
+            r.display()
+        s = "#\n"
+        self.assertEqual(f.getvalue(), s)
+        r.size = 3
+        f = io.StringIO()
+        with redirect_stdout(f):
+            r.display()
+        s = "\
+###\n\
+###\n\
+###\n\
+"
+        self.assertEqual(f.getvalue(), s)
+        r = Square(5, 6, 7)
+        f = io.StringIO()
+        with redirect_stdout(f):
+            r.display()
+        s = """\
+
+
+
+
+
+
+
+      #####
+      #####
+      #####
+      #####
+      #####
+"""
+        self.assertEqual(f.getvalue(), s)
+        r = Square(9, 8)
+        f = io.StringIO()
+        with redirect_stdout(f):
+            r.display()
+        s = """\
+        #########
+        #########
+        #########
+        #########
+        #########
+        #########
+        #########
+        #########
+        #########
+"""
