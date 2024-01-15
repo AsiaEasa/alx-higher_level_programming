@@ -56,6 +56,5 @@ class TestSquare(unittest.TestCase):
         ########
         ########
         ########
-        ########
 """
         self.assertEqual(f.getvalue(), n)
