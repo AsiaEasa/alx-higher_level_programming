@@ -14,6 +14,16 @@ class TestBase(unittest.TestCase):
 'json_string'"
         self.assertEqual(str(m.exception), n)
 
+        self.assertEqual(Base.from_json_string(None), [])
+        self.assertEqual(Base.from_json_string(""), [])
+
+        n = '[{"x": 4, "y": 4, "width": 4, "id": 4, "height": 4}, \
+{"x": 10, "y": 20, "width": 34, "id": 44, "height": 340}]'
+        k = [{'x': 4, 'y': 4, 'width': 4, 'id': 4, 'height': 4},
+             {'x': 10, 'y': 20, 'width': 34, 'id': 44,
+             'height': 340}]
+        self.assertEqual(Base.from_json_string(n), k)
+
         m = [{}, {}]
         n = '[{}, {}]'
         self.assertEqual(Base.from_json_string(n), m)
@@ -25,17 +35,7 @@ class TestBase(unittest.TestCase):
         n = '[{"hi": 90}, {"hello": 15}, {"HI": 9}]'
         self.assertEqual(Base.from_json_string(n), m)
 
-        self.assertEqual(Base.from_json_string(None), [])
-        self.assertEqual(Base.from_json_string(""), [])
-
-        n = '[{"x": 4, "y": 4, "width": 4, "id": 4, "height": 4}, \
-{"x": 10, "y": 20, "width": 34, "id": 44, "height": 340}]'
-        k = [{'x': 4, 'y': 4, 'width': 4, 'id': 4, 'height': 4},
-             {'x': 10, 'y': 20, 'width': 34, 'id': 44,
-             'height': 340}]
-        self.assertEqual(Base.from_json_string(n), k)
-
-
+ 
     def test_from_json_string_t(self):
         list_in = [{"id": 80, "width": 20, "height": 74}]
         json_list_in = Rectangle.to_json_string(list_in)
