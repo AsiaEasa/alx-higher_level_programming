@@ -63,6 +63,12 @@ class TestBase(unittest.TestCase):
     def test_o_save_to_file(self):
         '''Tests save_to_file() method.'''
         import os
+        m = Rectangle(10, 7, 6, 9)
+        m1 = Rectangle(2, 5)
+        Rectangle.save_to_file([m, m1])
+
+        with open("Rectangle.json", "r") as f:
+            self.assertEqual(len(f.read()), 105)
 
         Rectangle.save_to_file(None)
         with open("Rectangle.json", "r") as f:
@@ -75,10 +81,3 @@ class TestBase(unittest.TestCase):
         Rectangle.save_to_file([])
         with open("Rectangle.json", "r") as f:
             self.assertEqual(f.read(), "[]")
-
-    def test_save_to_file_one_rectangle(self):
-        n = Rectangle(10, 88, 4, 3, 5)
-        Rectangle.save_to_file([n])
-        with open("Rectangle.json", "r") as f:
-            self.assertTrue(len(f.read()) == 54)
-
