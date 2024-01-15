@@ -9,24 +9,49 @@ class TestBase(unittest.TestCase):
     def test_instantiation(self):
 
         with self.assertRaises(ValueError) as e:
-            r = Square(-71)
+            m = Square(-71)
         msg = "width must be > 0"
         self.assertEqual(str(e.exception), msg)
 
         with self.assertRaises(ValueError) as e:
-            r = Square(16, -662)
+            m = Square(16, -662)
         msg = "x must be >= 0"
         self.assertEqual(str(e.exception), msg)
 
         with self.assertRaises(ValueError) as e:
-            r = Square(1, 23, -83)
+            m = Square(1, 23, -83)
         msg = "y must be >= 0"
         self.assertEqual(str(e.exception), msg)
 
         with self.assertRaises(ValueError) as e:
-            r = Square(0)
+            m = Square(0)
         msg = "width must be > 0"
         self.assertEqual(str(e.exception), msg)
+
+    def test_no_arg(self):
+        m = Base()
+        b = Base()
+        self.assertEqual(m.id, b.id - 1)
+
+    def test_three_bases(self):
+        m = Base()
+        n = Base()
+        r = Base()
+        self.assertEqual(m.id, n.id - 1)
+
+    def test_None_id(self):
+        m = Base(None)
+        b = Base(None)
+        self.assertEqual(m.id, b.id - 1)
+
+    def test_unique_id(self):
+        self.assertEqual(11, Base(11).id)
+
+    def test_nb_instances_after_unique_id(self):
+        m = Base()
+        n = Base(11)
+        r = Base()
+        self.assertEqual(m.id, n.id - 4)
 
     def test_class(self):
         self.assertEqual(str(Square),
@@ -102,7 +127,7 @@ class TestBase(unittest.TestCase):
         Rectangle.save_to_file([m, m1])
 
         with open("Rectangle.json", "r") as f:
-            self.assertEqual(len(f.read()), 105)
+            self.assertEqual(len(f.read()), 107)
 
         Rectangle.save_to_file(None)
         with open("Rectangle.json", "r") as f:

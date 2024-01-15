@@ -15,7 +15,7 @@ class TestRectangle(unittest.TestCase):
         self.assertEqual(str(type(m)), "<class 'models.rectangle.Rectangle'>")
         self.assertTrue(isinstance(m, Base))
         n = {'_Rectangle__height': 30, '_Rectangle__width': 1,
-             '_Rectangle__x': 0, '_Rectangle__y': 0, 'id': 7}
+             '_Rectangle__x': 0, '_Rectangle__y': 0, 'id': 16}
         self.assertDictEqual(m.__dict__, n)
 
         with self.assertRaises(TypeError) as e:
