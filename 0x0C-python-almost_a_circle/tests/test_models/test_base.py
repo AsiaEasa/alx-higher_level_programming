@@ -6,6 +6,28 @@ from models.rectangle import Rectangle
 from models.square import Square
 
 class TestBase(unittest.TestCase):
+    def test_instantiation(self):
+
+        with self.assertRaises(ValueError) as e:
+            r = Square(-71)
+        msg = "width must be > 0"
+        self.assertEqual(str(e.exception), msg)
+
+        with self.assertRaises(ValueError) as e:
+            r = Square(16, -662)
+        msg = "x must be >= 0"
+        self.assertEqual(str(e.exception), msg)
+
+        with self.assertRaises(ValueError) as e:
+            r = Square(1, 23, -83)
+        msg = "y must be >= 0"
+        self.assertEqual(str(e.exception), msg)
+
+        with self.assertRaises(ValueError) as e:
+            r = Square(0)
+        msg = "width must be > 0"
+        self.assertEqual(str(e.exception), msg)
+
     def test_class(self):
         self.assertEqual(str(Square),
                          "<class 'models.square.Square'>")
@@ -94,25 +116,6 @@ class TestBase(unittest.TestCase):
         with open("Rectangle.json", "r") as f:
             self.assertEqual(f.read(), "[]")
 
-        with self.assertRaises(ValueError) as e:
-            r = Square(-71)
-        msg = "width must be > 0"
-        self.assertEqual(str(e.exception), msg)
-
-        with self.assertRaises(ValueError) as e:
-            r = Square(16, -662)
-        msg = "x must be >= 0"
-        self.assertEqual(str(e.exception), msg)
-
-        with self.assertRaises(ValueError) as e:
-            r = Square(1, 23, -83)
-        msg = "y must be >= 0"
-        self.assertEqual(str(e.exception), msg)
-
-        with self.assertRaises(ValueError) as e:
-            r = Square(0)
-        msg = "width must be > 0"
-        self.assertEqual(str(e.exception), msg)
 
 if __name__ == "__main__":
     unittest.main()
