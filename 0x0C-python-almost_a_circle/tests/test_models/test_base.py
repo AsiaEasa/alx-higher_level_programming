@@ -6,6 +6,19 @@ from models.rectangle import Rectangle
 from models.square import Square
 
 class TestBase(unittest.TestCase):
+    def test_class(self):
+        self.assertEqual(str(Square),
+                         "<class 'models.square.Square'>")
+
+    def test_inheritance(self):
+        self.assertTrue(issubclass(Square, Base))
+
+    def test_constructor(self):
+        with self.assertRaises(TypeError) as e:
+            m = Square()
+        n = "__init__() missing 1 required positional argument: 'size'"
+        self.assertEqual(str(e.exception), n)
+
     def test_from_json_string_l(self):
         with self.assertRaises(TypeError) as m:
             Base.from_json_string()
@@ -80,6 +93,26 @@ class TestBase(unittest.TestCase):
         Rectangle.save_to_file([])
         with open("Rectangle.json", "r") as f:
             self.assertEqual(f.read(), "[]")
+
+        with self.assertRaises(ValueError) as e:
+            r = Square(-71)
+        msg = "width must be > 0"
+        self.assertEqual(str(e.exception), msg)
+
+        with self.assertRaises(ValueError) as e:
+            r = Square(16, -662)
+        msg = "x must be >= 0"
+        self.assertEqual(str(e.exception), msg)
+
+        with self.assertRaises(ValueError) as e:
+            r = Square(1, 23, -83)
+        msg = "y must be >= 0"
+        self.assertEqual(str(e.exception), msg)
+
+        with self.assertRaises(ValueError) as e:
+            r = Square(0)
+        msg = "width must be > 0"
+        self.assertEqual(str(e.exception), msg)
 
 if __name__ == "__main__":
     unittest.main()
