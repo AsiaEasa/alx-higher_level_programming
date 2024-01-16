@@ -177,6 +177,18 @@ class TestSquare(unittest.TestCase):
         self.assertEqual(self.square.x, 2)
         self.assertEqual(self.square.y, 3)
 
+    def test_save_to_file_with_none(self):
+        m = Square(5)
+        Square.save_to_file(None)
+        with open("Square.json", "r") as file:
+            self.assertEqual(file.read(), "[]")
+
+    def test_save_to_file_with_empty_list(self):
+        m = Square(5)
+        Square.save_to_file([])
+        with open("Square.json", "r") as file:
+            self.assertEqual(file.read(), "[]")
+
 
     def test_to_dictionary(self):
         square = Square(5, 2, 3, 1)
