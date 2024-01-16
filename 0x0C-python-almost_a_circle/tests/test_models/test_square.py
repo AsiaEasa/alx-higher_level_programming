@@ -6,7 +6,7 @@ from models.square import Square
 from random import randrange
 from contextlib import redirect_stdout
 import io
-
+import os
 
 class TestSquare(unittest.TestCase):
     '''Tests Base class.'''
@@ -175,6 +175,22 @@ class TestSquare(unittest.TestCase):
         self.assertEqual(self.square.size, 1)
         self.assertEqual(self.square.x, 2)
         self.assertEqual(self.square.y, 3)
+
+    def test_square_exists(self):
+        square = Square(1, 2, 3, 4)
+        self.assertIsInstance(square, Square)
+
+    def test_str_exists(self):
+        square = Square(1, 2, 3, 4)
+        self.assertTrue(hasattr(square, '__str__'))
+
+    def test_str_representation(self):
+        square = Square(1, 2, 3, 4)
+        self.assertEqual(str(square), '[Square] (4) 2/3 - 1')
+
+    def test_to_dictionary_exists(self):
+        square = Square(1, 2, 3, 4)
+        self.assertTrue(hasattr(square, 'to_dictionary'))
 
 if __name__ == "__main__":
     unittest.main()
