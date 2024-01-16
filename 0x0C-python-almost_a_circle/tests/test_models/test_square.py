@@ -129,6 +129,7 @@ class TestSquare(unittest.TestCase):
         p = "display() missing 1 required positional argument: 'self'"
         self.assertEqual(str(e.exception), p)
 
+
     def setUp(self):
         self.square = Square(5, 2, 3, 1)
 
@@ -175,6 +176,14 @@ class TestSquare(unittest.TestCase):
         self.assertEqual(self.square.size, 1)
         self.assertEqual(self.square.x, 2)
         self.assertEqual(self.square.y, 3)
+
+
+    def test_to_dictionary(self):
+        square = Square(5, 2, 3, 1)
+        dictionary = square.to_dictionary()
+        expected_dict = {"id": 1, "size": 5, "x": 2, "y": 3}
+        self.assertEqual(dictionary, expected_dict)
+
 
     def test_square_exists(self):
         square = Square(1, 2, 3, 4)
