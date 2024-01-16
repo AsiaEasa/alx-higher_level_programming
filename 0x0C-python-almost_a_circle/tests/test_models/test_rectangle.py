@@ -97,7 +97,7 @@ class TestRectangle(unittest.TestCase):
         self.assertEqual(str(type(m)), "<class 'models.rectangle.Rectangle'>")
         self.assertTrue(isinstance(m, Base))
         n = {'_Rectangle__height': 30, '_Rectangle__width': 1,
-             '_Rectangle__x': 0, '_Rectangle__y': 0, 'id': 24}
+             '_Rectangle__x': 0, '_Rectangle__y': 0, 'id': 30}
         self.assertDictEqual(m.__dict__, n)
 
         with self.assertRaises(TypeError) as e:
@@ -130,6 +130,59 @@ class TestRectangle(unittest.TestCase):
         r = Rectangle(10, 20, 6, 1, 2)
         with self.assertRaises(TypeError):
             r.to_dictionary(1)
+
+
+    def test_rectangle_exists(self):
+        with self.assertRaises(ValueError) as context:
+            rect = Rectangle(1, 0)
+
+        self.assertEqual(str(context.exception), 'height must be > 0')
+
+    def test_area_exists(self):
+        with self.assertRaises(ValueError) as context:
+
+            rect = Rectangle(1, 0)
+        self.assertEqual(str(context.exception), 'height must be > 0')
+
+    def test_area_calculation(self):
+        rect = Rectangle(4, 5)
+        self.assertEqual(rect.area(), 20)
+
+   
+    def test_str_exists(self):
+        with self.assertRaises(ValueError) as context:
+            rect = Rectangle(1, 0)
+
+        self.assertEqual(str(context.exception), 'height must be > 0')
+
+    def test_str_representation(self):
+        with self.assertRaises(ValueError) as context:
+            rect = Rectangle(1, 0)
+
+        self.assertEqual(str(context.exception), 'height must be > 0')
+
+    def test_create_with_id(self):
+        rect = Rectangle.create(**{'id': 89})
+        self.assertEqual(rect.id, 89)
+
+    def test_create_with_id_and_width(self):
+        rect = Rectangle.create(**{'id': 89, 'width': 1})
+        self.assertEqual(rect.id, 89)
+        self.assertEqual(rect.width, 1)
+
+    def test_create_with_id_width_and_height(self):
+        rect = Rectangle.create(**{'id': 89, 'width': 1, 'height': 2})
+        self.assertEqual(rect.id, 89)
+        self.assertEqual(rect.width, 1)
+        self.assertEqual(rect.height, 2)
+
+    def test_create_with_all_parameters(self):
+        rect = Rectangle.create(**{'id': 89, 'width': 1, 'height': 2, 'x': 3, 'y': 4})
+        self.assertEqual(rect.id, 89)
+        self.assertEqual(rect.width, 1)
+        self.assertEqual(rect.height, 2)
+        self.assertEqual(rect.x, 3)
+        self.assertEqual(rect.y, 4)
 
 if __name__ == "__main__":
     unittest.main()
