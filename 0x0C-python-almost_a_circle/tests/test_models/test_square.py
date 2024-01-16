@@ -129,5 +129,52 @@ class TestSquare(unittest.TestCase):
         p = "display() missing 1 required positional argument: 'self'"
         self.assertEqual(str(e.exception), p)
 
+    def setUp(self):
+        self.square = Square(5, 2, 3, 1)
+
+    def test_update_id(self):
+        self.square.update(89)
+        self.assertEqual(self.square.id, 89)
+
+    def test_update_id_size(self):
+        self.square.update(89, 1)
+        self.assertEqual(self.square.id, 89)
+        self.assertEqual(self.square.size, 1)
+
+    def test_update_id_size_x(self):
+        self.square.update(89, 1, 2)
+        self.assertEqual(self.square.id, 89)
+        self.assertEqual(self.square.size, 1)
+        self.assertEqual(self.square.x, 2)
+
+    def test_update_id_size_x_y(self):
+        self.square.update(89, 1, 2, 3)
+        self.assertEqual(self.square.id, 89)
+        self.assertEqual(self.square.size, 1)
+        self.assertEqual(self.square.x, 2)
+        self.assertEqual(self.square.y, 3)
+
+    def test_update_kwargs_id(self):
+        self.square.update(**{'id': 89})
+        self.assertEqual(self.square.id, 89)
+
+    def test_update_kwargs_id_size(self):
+        self.square.update(**{'id': 89, 'size': 1})
+        self.assertEqual(self.square.id, 89)
+        self.assertEqual(self.square.size, 1)
+
+    def test_update_kwargs_id_size_x(self):
+        self.square.update(**{'id': 89, 'size': 1, 'x': 2})
+        self.assertEqual(self.square.id, 89)
+        self.assertEqual(self.square.size, 1)
+        self.assertEqual(self.square.x, 2)
+
+    def test_update_kwargs_id_size_x_y(self):
+        self.square.update(**{'id': 89, 'size': 1, 'x': 2, 'y': 3})
+        self.assertEqual(self.square.id, 89)
+        self.assertEqual(self.square.size, 1)
+        self.assertEqual(self.square.x, 2)
+        self.assertEqual(self.square.y, 3)
+
 if __name__ == "__main__":
     unittest.main()
