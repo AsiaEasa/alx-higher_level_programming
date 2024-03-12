@@ -10,13 +10,13 @@ module.exports = class Rectangle {
   print = () => {
     let m = 0;
     while (m < this.height) {
-      let Xshape = '';
+      let X = '';
       let n = 0;
       while (n < this.width) {
-        Xshape += 'X';
+        X += 'X';
         n++;
       }
-      console.log(Xshape);
+      console.log(X);
       m++;
     }
   };
