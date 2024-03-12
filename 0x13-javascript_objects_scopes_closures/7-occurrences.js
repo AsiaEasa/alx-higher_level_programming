@@ -5,8 +5,8 @@ exports.nbOccurences = function (list, searchElement) {
   while (i < list.length) {
     if (searchElement === list[i]) {
       N++;
-      i++;
     }
+    i++;
   }
   return N;
 };
