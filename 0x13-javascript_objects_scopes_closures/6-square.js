@@ -7,10 +7,10 @@ module.exports = class Square extends SquareP {
       c = 'X';
     }
     let i = 0;
-    for (i < this.height) {
+    while (i < this.height) {
       let s = '';
       let j = 0;
-      for (j < this.width) {
+      while (j < this.width) {
         s += c;
 	j++;
       }
