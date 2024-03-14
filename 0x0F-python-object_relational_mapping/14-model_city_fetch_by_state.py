@@ -9,12 +9,9 @@ from model_state import Base, State
 from model_city import City
 
 if __name__ == "__main__":
-    if len(sys.argv) != 4:
-        print(
-            "Usage: {} <mysql_username> <mysql_password> <database_name>".format(
-                sys.argv[0]
-            )
-        )
+    if len(argv) != 4:
+        print("Usage: {} <mysql_username> <mysql_password> <database_name>"
+              .format(argv[0]))
         exit(1)
 
     engine = create_engine(
@@ -31,7 +28,9 @@ if __name__ == "__main__":
     cities = session.query(City).order_by(City.id).all()
     for city in cities:
         state_name = (
-            session.query(State.name).filter(State.id == city.state_id).first()[0]
+            session.query(State.name)
+            .filter(State.id == city.state_id)
+            .first()[0]
         )
         print("{}: ({}) {}".format(state_name, city.id, city.name))
 
