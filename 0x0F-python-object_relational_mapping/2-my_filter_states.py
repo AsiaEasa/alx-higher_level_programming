@@ -3,29 +3,28 @@
 import sys
 import MySQLdb
 
-def ListStates (USER, PASS, DB):
-    """lists all states from the database hbtn_0e_0_usa.
-    """
-    db = MySQLdb.connect(host='localhost',\
-            port=3306,\
-            user=USER,\
-            passwd=PASS,\
-            db=DB)
-    cursor = db.cursor()
-    cur.execute("SELECT * FROM states WHERE name LIKE BINARY '{}' ORDER BY states.id"
-                .format(sys.argv[4]))
-    rows = cursor.fetchall()
 
-    for row in rows:
-        print(row)
+def ListStates(USER, PASS, DB):
+    """Lists all states from the database hbtn_0e_0_usa."""
+    db = MySQLdb.connect(host="localhost", port=3306, user=USER, passwd=PASS, db=DB)
+    cursor = db.cursor()
+    cursor.execute(
+        "SELECT * FROM states WHERE name LIKE BINARY '{}' ORDER BY states.id".format(
+            sys.argv[4]
+        )
+    )
+    rows = cursor.fetchall()
 
-    cursor.close()
-    db.close()
+    for row in rows:
+        print(row)
 
-if __name__ == '__main__':
+    cursor.close()
+    db.close()
 
-    USER = sys.argv[1]
-    PASS = sys.argv[2]
-    DB = sys.argv[3]
 
-    ListStates(USER, PASS, DB)
+if __name__ == "__main__":
+    USER = sys.argv[1]
+    PASS = sys.argv[2]
+    DB = sys.argv[3]
+
+    ListStates(USER, PASS, DB)
