@@ -9,7 +9,7 @@ from model_state import Base, State
 from model_city import City
 
 if __name__ == "__main__":
-    if len(argv) != 4:
+    if len(sys.argv) != 4:
         print("Usage: {} <mysql_username> <mysql_password> <database_name>"
               .format(argv[0]))
         exit(1)
