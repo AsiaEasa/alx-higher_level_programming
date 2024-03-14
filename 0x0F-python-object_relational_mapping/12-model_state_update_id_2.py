@@ -8,7 +8,7 @@ from sqlalchemy.orm import sessionmaker
 from model_state import Base, State
 
 if __name__ == "__main__":
-    if len(argv) != 4:
+    if len(sys.argv) != 4:
         print("Usage: {} <mysql_username> <mysql_password> <database_name>"
               .format(argv[0]))
         exit(1)
