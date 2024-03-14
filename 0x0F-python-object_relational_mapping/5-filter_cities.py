@@ -1,38 +1,42 @@
 #!/usr/bin/python3
-"""takes in the name of a state 
+"""Takes in the name of a state
 as an argument and lists all cities of that state
 """
-
+import MySQLdb
+import sys
 
 if __name__ == "__main__":
-    import MySQLdb
-    import sys
-    if len(argv) != 5:
-         print("Usage: {} <mysql_username> <mysql_password> <database_name> <state_name>"
-               .format(argv[0]))
-         exit(1)
+    if len(sys.argv) != 5:
+        print(
+            "Usage: {} <mysql_username> <mysql_password> <database_name> <state_name>".format(
+                sys.argv[0]
+            )
+        )
+        exit(1)
 
-    USER = argv[1]
-    PASS = argv[2]
-    DB = argv[3]
+    USER = sys.argv[1]
+    PASS = sys.argv[2]
+    DB = sys.argv[3]
 
-    db = MySQLdb.connect(host=localhost,
-                         port=3306,
-                         user=USER,
-                         passwd=PASS,
-                         db=DB)
+    db = MySQLdb.connect(host="localhost", port=3306, user=USER, passwd=PASS, db=DB)
 
-    cursor = db.cursor()
+    cursor = db.cursor()
 
-    cursor.execute("SELECT * FROM cities AS c",
-                      "INNER JOIN states AS s",
-                      "JOIN states ON cities.state_id = states.id",
-                      "ON c.state_id = s.id",
-                      "ORDER BY c.id")
+    Q = """
+            SELECT cities.id, cities.name, states.name
+            FROM cities
+            JOIN states ON cities.state_id = states.id
+            WHERE states.name = %s
+            ORDER BY cities.id
+            """
+    cursor.execute(Q, (sys.argv[4],))
 
-    rows = cursor.fetchall()
-    filtered_cities = [city[2] for city in rows if city[4] == sys.argv[4]]
-    print(", ".join(filtered_cities))
+    rows = cursor.fetchall()
 
-    cursor.close()
-    db.close()
+    if rows:
+        print(", ".join(row[0] for row in rows))
+    else:
+        print()
+
+    cursor.close()
+    db.close()
