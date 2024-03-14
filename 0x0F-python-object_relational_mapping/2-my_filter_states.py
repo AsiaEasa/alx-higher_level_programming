@@ -6,13 +6,21 @@ import MySQLdb
 
 def ListStates(USER, PASS, DB):
     """Lists all states from the database hbtn_0e_0_usa."""
-    db = MySQLdb.connect(host="localhost", port=3306, user=USER, passwd=PASS, db=DB)
-    cursor = db.cursor()
-    cursor.execute(
-        "SELECT * FROM states WHERE name LIKE BINARY '{}' ORDER BY states.id".format(
-            sys.argv[4]
-        )
+    db = MySQLdb.connect(
+        host="localhost",
+        port=3306,
+        user=USER,
+        passwd=PASS,
+        db=DB
     )
+    cursor = db.cursor()
+    cursor.execute("""
+        SELECT *
+        FROM states
+        WHERE name LIKE BINARY %s
+        ORDER BY states.id
+    """, (sys.argv[4],))
+
     rows = cursor.fetchall()
 
     for row in rows:

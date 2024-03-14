@@ -6,7 +6,13 @@ import MySQLdb
 
 def ListStates(USER, PASS, DB):
     """Lists all states from the database hbtn_0e_0_usa."""
-    db = MySQLdb.connect(host="localhost", port=3306, user=USER, passwd=PASS, db=DB)
+    db = MySQLdb.connect(
+        host="localhost",
+        port=3306,
+        user=USER,
+        passwd=PASS,
+        db=DB
+    )
     cursor = db.cursor()
     cursor.execute(
         """SELECT * FROM states WHERE name
