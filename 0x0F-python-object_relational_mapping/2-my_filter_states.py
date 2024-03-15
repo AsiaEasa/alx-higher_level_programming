@@ -19,7 +19,7 @@ def ListStates(USER, PASS, DB):
         FROM states
         WHERE name LIKE BINARY %s
         ORDER BY states.id
-    """, (sys.argv[4],))
+    """, ('%' + sys.argv[4] + '%',))
 
     rows = cursor.fetchall()
 
