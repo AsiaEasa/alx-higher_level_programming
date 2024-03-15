@@ -17,7 +17,7 @@ def ListStates(USER, PASS, DB):
     cursor.execute("""
         SELECT *
         FROM states
-        WHERE name LIKE BINARY %s
+        WHERE name = BINARY %s
         ORDER BY states.id
     """, (sys.argv[4],))
 
