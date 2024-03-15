@@ -17,7 +17,7 @@ def ListStates(USER, PASS, DB):
     cursor.execute("""
         SELECT *
         FROM states
-        WHERE name = BINARY %s
+        WHERE name LIKE BINARY %s
         ORDER BY states.id
     """, (sys.argv[4],))
 
@@ -26,7 +26,6 @@ def ListStates(USER, PASS, DB):
     for row in rows:
         print(row)
 
-    cursor.close()
     db.close()
 
 
