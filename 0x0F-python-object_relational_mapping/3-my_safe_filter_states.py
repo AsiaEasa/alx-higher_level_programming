@@ -25,7 +25,7 @@ def ListStates(USER, PASS, DB):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 4:
+    if len(sys.argv) != 5:
         print("Usage: {} <mysql_username> <mysql_password> <database_name>"
               .format(sys.argv[0]))
         exit(1)
