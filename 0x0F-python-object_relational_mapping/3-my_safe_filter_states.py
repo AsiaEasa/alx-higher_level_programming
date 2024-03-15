@@ -4,7 +4,7 @@ import sys
 import MySQLdb
 
 
-def ListStates(USER, PASS, DB):
+def ListStates(USER, PASS, DB, SN):
     """Script that takes in arguments and displays all values in the states"""
     db = MySQLdb.connect(
         host="localhost",
@@ -14,7 +14,7 @@ def ListStates(USER, PASS, DB):
         db=DB
     )
     cursor = db.cursor()
-    cursor.execute("SELECT * FROM states")
+    cursor.execute("SELECT * FROM states WHERE name = %s ORDER BY id ASC", (SN,))
     rows = cursor.fetchall()
 
     for row in rows:
@@ -33,5 +33,6 @@ if __name__ == "__main__":
     USER = sys.argv[1]
     PASS = sys.argv[2]
     DB = sys.argv[3]
+    SN = sys.argv[4]
 
-    ListStates(USER, PASS, DB)
+    ListStates(USER, PASS, DB, SN)
