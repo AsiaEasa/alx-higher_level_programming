@@ -14,7 +14,8 @@ def ListStates(USER, PASS, DB, SN):
         db=DB
     )
     cursor = db.cursor()
-    cursor.execute("SELECT * FROM states WHERE name = %s ORDER BY id ASC", (SN,))
+    cursor.execute("SELECT * FROM states WHERE name = %s \
+    ORDER BY id ASC", (SN,))
     rows = cursor.fetchall()
 
     for row in rows:
