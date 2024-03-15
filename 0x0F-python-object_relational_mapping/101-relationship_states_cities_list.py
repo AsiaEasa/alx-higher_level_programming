@@ -6,8 +6,9 @@ from sqlalchemy.orm import sessionmaker
 from relationship_state import State
 from relationship_city import City
 
-
-def print_states_and_cities(username, password, database):
+if __name__ == "__main__":
+    username, password, database = sys.argv[1], sys.argv[2], sys.argv[3]
+    
     engine = create_engine(
         f"mysql+mysqldb://{username}:{password}@localhost/{database}",
         pool_pre_ping=True,
@@ -26,8 +27,3 @@ def print_states_and_cities(username, password, database):
             print(f"    {city.id}: {city.name}")
             city_index += 1
         state_index += 1
-
-
-if __name__ == "__main__":
-    username, password, database = sys.argv[1], sys.argv[2], sys.argv[3]
-    print_states_and_cities(username, password, database)
