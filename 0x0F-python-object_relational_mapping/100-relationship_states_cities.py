@@ -5,9 +5,8 @@ Script that adds the State object “Louisiana” to the database hbtn_0e_6_usa
 import sys
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from relationship_state import State
+from model_state import Base, State
 from relationship_city import City
-from model_state import Base
 
 if __name__ == "__main__":
     if len(sys.argv) != 4:
