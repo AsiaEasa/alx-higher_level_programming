@@ -9,6 +9,7 @@ if __name__ == "__main__":
     USER = sys.argv[1]
     PASS = sys.argv[2]
     DB = sys.argv[3]
+    SN = sys.argv[4]
 
     db = MySQLdb.connect(
         host="localhost",
@@ -26,5 +27,5 @@ if __name__ == "__main__":
                    ON ct.state_id = s.id \
                 ORDER BY ct.id"
     )
-    print(", ".join([ct[2] for ct in ct.fetchall() if ct[4] == sys.argv[4]]))
+    print(", ".join([ct[2] for ct in cursor.fetchall() if ct[4] == SN]))
     db.close()
