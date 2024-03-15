@@ -1,36 +1,33 @@
 #!/usr/bin/python3
-"""
-Script that adds the State object “Louisiana” to the database hbtn_0e_6_usa
-"""
+"""Module that lists all State objects"""
 import sys
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from model_state import Base, State
+from relationship_state import State
 from relationship_city import City
-from sqlalchemy.orm import relationship
 
-if __name__ == "__main__":
-    if len(sys.argv) != 4:
-        print("Usage: {} <mysql_username> <mysql_password> <database_name>"
-              .format(argv[0]))
-        exit(1)
 
+def print_states_and_cities(username, password, database):
     engine = create_engine(
-        "mysql+mysqldb://{}:{}@localhost:3306/{}".format(
-            sys.argv[1], sys.argv[2], sys.argv[3]
-        ),
+        f"mysql+mysqldb://{username}:{password}@localhost/{database}",
         pool_pre_ping=True,
     )
-
-    Base.metadata.create_all(engine)
     Session = sessionmaker(bind=engine)
     session = Session()
 
     states = session.query(State).order_by(State.id).all()
+    state_index = 0
+    while state_index < len(states):
+        state = states[state_index]
+        print(f"{state.id}: {state.name}")
+        city_index = 0
+        while city_index < len(state.cities):
+            city = state.cities[city_index]
+            print(f"    {city.id}: {city.name}")
+            city_index += 1
+        state_index += 1
 
-    for state in states:
-        print("{}: {}".format(state.id, state.name))
-        for city in state.cities:
-            print("\t{}: {}".format(city.id, city.name))
 
-    session.close()
+if __name__ == "__main__":
+    username, password, database = sys.argv[1], sys.argv[2], sys.argv[3]
+    print_states_and_cities(username, password, database)
