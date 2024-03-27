@@ -8,7 +8,7 @@ def find_peak(list_of_integers):
         return None
 
     L = 0
-    R = len(list_of_integers) -1
+    R = len(list_of_integers) - 1
 
     while L < R:
         M = L + (R - L) // 2
