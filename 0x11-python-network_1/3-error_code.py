@@ -3,7 +3,8 @@ import urllib.request
 import urllib.error
 import sys
 
-def main():
+
+if __name__ == "__main__":
     URL = sys.argv[1]
     REQ = urllib.request.Request(URL)
 
@@ -13,6 +14,3 @@ def main():
             print(B)
     except urllib.error.HTTPError as E:
         print(f"Error code: {E.code}")
-
-if __name__ == "__main__":
-    main()
