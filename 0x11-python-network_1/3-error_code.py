@@ -1,6 +1,6 @@
-#!/usr/bin/env python3
-import urllib.request
-import urllib.error
+#!/usr/bin/python3
+"""Python script that takes in a URL"""
+from urllib import request, error
 import sys
 
 
